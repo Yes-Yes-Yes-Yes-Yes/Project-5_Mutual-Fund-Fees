@@ -1,44 +1,46 @@
 """
 CFM301 Project 5 - Are the fees justified?  Institutional share classes of active funds.
-DATA STAGE: pull + construct + clean.
+DATA STAGE: download the raw data, build monthly returns, clean them.
 
-Question: Do the institutional share classes of active large-cap value funds earn enough before
-fees to justify what they charge, and should institutions pay for active management through a
-flat fee, a fulcrum fee, or simply index?
+Question: do the institutional share classes of active large-cap value funds earn enough before
+fees to justify what they charge, and should institutions pay a flat fee, a fulcrum fee, or index?
 
-Design: five active large-cap value funds, each through its INSTITUTIONAL class ($1M-$5M minimum,
-the cheapest way to hire the manager through a mutual fund). Benchmark: three Vanguard
-INSTITUTIONAL index funds ($5M minimum). Only institutional share classes are used.
-Every class has full daily history 2010-12-01 .. 2026
-(4,018 trading days), so all series cover the same 189 months.
+Funds: five active large-cap value funds through their INSTITUTIONAL class ($1M-$5M minimum),
+benchmarked against three Vanguard INSTITUTIONAL index funds ($5M minimum). Every class has full
+daily history from 2010-12-01, so all series cover the same months (2011-01 .. last factor month).
 
-  python get_data.py --download   # ONLINE, run once: writes data_raw/ (Yahoo + Ken French)
-  python get_data.py              # OFFLINE (default): builds data_clean/ from data_raw/ only
+HOW TO RUN
+  python get_data.py --download   # online, run once: refreshes the downloaded files in data_raw/
+  python get_data.py              # offline: builds data_clean/ from data_raw/ only
 
-Sources
-  Yahoo Finance (yfinance) : daily NAV + distributions per share class, fee/turnover snapshot
-  Ken French data library  : MKT-RF, SMB, HML, RF and MOM (UMD), monthly
-  Fund documents (labelled): minimum initial investment (MIN_INVEST below, source URL in SOURCES)
+WHERE EACH INPUT COMES FROM (all files in data_raw/)
+  daily_<TICKER>.csv             DOWNLOADED by this script from Yahoo Finance (yfinance package),
+                                 https://finance.yahoo.com/quote/<TICKER>/history
+                                 columns: Date, Close (NAV, split-adjusted only), Adj Close,
+                                 Dividends, Capital Gains, Stock Splits
+  F-F_Research_Data_Factors.csv  DOWNLOADED by this script from the Ken French Data Library,
+  F-F_Momentum_Factor.csv        https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html
+                                 Mkt-RF, SMB, HML, RF, Mom in % per month
+  expense_ratio_history.csv      TYPED IN BY HAND (not downloaded): one row per fund per fiscal year,
+                                 the NET expense ratio (after waivers) and portfolio turnover from the
+                                 "Financial Highlights" table of each fund's annual report (Form N-CSR)
+                                 on SEC EDGAR, https://www.sec.gov/edgar/search/. Each row names its
+                                 report in 'source' and links the filing in 'source_url'. Fiscal years
+                                 whose report is not filed yet are left blank and carried forward.
+  MIN_INVEST / MIN_INVEST_URL    (below, in this file) minimum initial investment, typed in by hand
+                                 from the page in MIN_INVEST_URL.
 
-data_raw/   (submit these - the build step reads nothing else)
-  daily_<TICKER>.csv             raw daily NAV (Close, not dividend-adjusted), Adj Close, distributions
-  fund_info.csv                  Yahoo snapshot: expense ratio, turnover, total assets, inception
-  F-F_Research_Data_Factors.csv  Ken French 3 factors + RF (raw, % per month)
-  F-F_Momentum_Factor.csv        Ken French momentum (raw, % per month)
-  expense_ratio_history.csv      fee history from annual reports (N-CSR Financial Highlights):
-                                 ticker,fiscal_year_end,expense_ratio_pct,turnover_pct,source
-                                 (blank template: python get_data.py --fee-template)
-
-data_clean/
-  monthly_returns.csv   share-class level: net TR, expense ratio, gross TR, RF, excess returns
-  fund_monthly.csv      one row per (fund, investor, month): investor = inst | index;
-                        net/gross excess returns (raw, winsorized 1/99 and 5/95) + factors
+OUTPUTS (data_clean/)
+  monthly_returns.csv   one row per share class and month: net return, expense ratio, gross return,
+                        RF, excess returns, outlier flag
+  fund_monthly.csv      the analysis file: net/gross excess returns (raw and winsorized 1/99, 5/95)
+                        with the factors merged in
   factors_monthly.csv   mktrf, smb, hml, umd, rf (decimals)
-  index_returns.csv     wide: monthly net returns of the index funds (constrained benchmark, Req 7)
-  fees.csv              one row per class: group, minimum, ER, turnover, sources
+  index_returns.csv     monthly net returns of the three index funds, side by side
+  fees.csv              one row per class: minimum, latest expense ratio and turnover, their sources
   distributions.csv     every dividend / capital-gain distribution
-  return_check.csv      months where our TR differs from Yahoo Adj Close by > 0.5%
-  cleaning_log.csv      every cleaning step and how many observations it affected (Req 4)
+  return_check.csv      months where our return differs from Yahoo's Adj Close by more than 0.5%
+  cleaning_log.csv      every cleaning step and how many observations it affected
 """
 
 import argparse
@@ -53,35 +55,34 @@ import numpy as np
 import pandas as pd
 
 # ---------------------------------------------------------------------------
-# 1. CONFIGURATION
+# 1. SETTINGS
 # ---------------------------------------------------------------------------
 BASE = os.path.dirname(os.path.abspath(__file__))
 RAW_DIR, CLEAN_DIR = os.path.join(BASE, "data_raw"), os.path.join(BASE, "data_clean")
 
-START = "2010-12-01"            # one month early: Jan 2011 return needs the Dec 2010 NAV
+START = "2010-12-01"            # one month early: the Jan 2011 return needs the Dec 2010 NAV
 FIRST_MONTH = "2011-01"         # sample start; sample end = last month in the factor file
 
-# Active large-cap value funds, institutional share class only.
-ACTIVE_FUNDS = {
+# fund name -> {investor type: ticker}
+ACTIVE_FUNDS = {                # active large-cap value funds, institutional class only
     "JPMorgan Equity Income":      {"inst": "HLIEX"},
     "BlackRock Equity Dividend":   {"inst": "MADVX"},
     "Lord Abbett Affiliated":      {"inst": "LAFYX"},
     "American Century Value":      {"inst": "AVLIX"},
     "Goldman Sachs Equity Income": {"inst": "GSIIX"},
 }
-# Institutional index funds = implementable benchmark (Req 7, Ch 10 slides 31-34).
-INDEX_FUNDS = {
-    "Vanguard Institutional Index":     {"index": "VINIX"},
-    "Vanguard Small-Cap Index":         {"index": "VSCIX"},
-    "Vanguard Value Index":             {"index": "VIVIX"},
+INDEX_FUNDS = {                 # institutional index funds = the cheap alternative (benchmark)
+    "Vanguard Institutional Index": {"index": "VINIX"},
+    "Vanguard Small-Cap Index":     {"index": "VSCIX"},
+    "Vanguard Value Index":         {"index": "VIVIX"},
 }
-# Minimum initial investment (USD). Yahoo does not report it, so each value is entered by hand with
-# the page it came from (SOURCES). Confirm against the current prospectus before submitting.
+
+# Minimum initial investment (USD), typed in by hand from the page in MIN_INVEST_URL.
 MIN_INVEST = {
     "HLIEX": 1_000_000, "MADVX": 2_000_000, "LAFYX": 1_000_000, "AVLIX": 5_000_000, "GSIIX": 1_000_000,
     "VINIX": 5_000_000, "VSCIX": 5_000_000, "VIVIX": 5_000_000,
 }
-SOURCES = {
+MIN_INVEST_URL = {
     "HLIEX": "https://www.morningstar.com/funds/xnas/hliex/quote",
     "MADVX": "https://www.morningstar.com/funds/xnas/madvx/strategy",
     "LAFYX": "https://zacks.com/funds/mutual-fund/quote/LAFYX/class-info",
@@ -92,32 +93,20 @@ SOURCES = {
     "VIVIX": "https://www.zacks.com/funds/mutual-fund/quote/VIVIX/class-info",
 }
 
-# Fiscal year-end (MM-DD) of each fund, used only to pre-fill the fee-history template. Confirmed
-# from the annual reports (Form N-CSR); BlackRock's year ended Jul 31 until 2019 and Apr 30 from 2020,
-# which data_raw/expense_ratio_history.csv records row by row.
-FISCAL_YEAR_END = {
-    "JPMorgan Equity Income": "06-30",
-    "BlackRock Equity Dividend": "04-30",
-    "Lord Abbett Affiliated": "10-31",
-    "American Century Value": "03-31",
-    "Goldman Sachs Equity Income": "08-31",
-    "Vanguard Institutional Index": "12-31",
-    "Vanguard Small-Cap Index": "12-31",
-    "Vanguard Value Index": "12-31",
-}
-
-WINSOR_MAIN = (0.01, 0.99)      # winsorized versions kept for the sensitivity analysis (Req 10)
-WINSOR_ALT = (0.05, 0.95)
-CHECK_TOL = 0.005               # flag |our TR - Adj Close TR| > 0.5% in a month
-OUTLIER_Z = 4.0                 # flag months more than 4 sd from the class's own mean
+FEE_FILE = "expense_ratio_history.csv"      # hand-collected from annual reports, see top of file
 
 KF_URL = "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/"
-KF_FILES = {"F-F_Research_Data_Factors": "F-F_Research_Data_Factors.csv",
+KF_FILES = {"F-F_Research_Data_Factors": "F-F_Research_Data_Factors.csv",   # zip name -> saved csv
             "F-F_Momentum_Factor": "F-F_Momentum_Factor.csv"}
+
+CHECK_TOL = 0.005               # flag months where |our return - Adj Close return| > 0.5%
+OUTLIER_Z = 4.0                 # flag months more than 4 s.d. from the class's own mean (kept)
+WINSOR_MAIN = (0.01, 0.99)      # winsorized copies, for the sensitivity analysis only
+WINSOR_ALT = (0.05, 0.95)
 
 
 def universe():
-    """(group, fund, ticker, investor) for every share class."""
+    """List every share class as (group, fund, ticker, investor)."""
     rows = []
     for group, funds in (("active", ACTIVE_FUNDS), ("index", INDEX_FUNDS)):
         for fund, classes in funds.items():
@@ -134,18 +123,17 @@ def clean(name):
 
 
 # ---------------------------------------------------------------------------
-# 2. DOWNLOAD (online, run once)
+# 2. DOWNLOAD (online, run once with --download)
 # ---------------------------------------------------------------------------
 def download_yahoo():
+    """Daily NAV and distributions for every share class -> data_raw/daily_<TICKER>.csv (unchanged)."""
     import yfinance as yf
     end = dt.date.today().isoformat()
-    infos, missing = [], []
-    for group, fund, tk, inv in universe():
-        print(f"Yahoo: {tk} ({fund}, {inv})")
-        t = yf.Ticker(tk)
-        df = t.history(start=START, end=end, interval="1d", auto_adjust=False, actions=True)
+    for _, fund, tk, _ in universe():
+        print(f"Yahoo: {tk} ({fund})")
+        # auto_adjust=False keeps 'Close' as the actual NAV (not reduced for distributions)
+        df = yf.Ticker(tk).history(start=START, end=end, interval="1d", auto_adjust=False, actions=True)
         if df.empty:
-            missing.append(tk)
             print(f"  !! no price data for {tk} - check the ticker")
             continue
         df.index = pd.to_datetime(df.index).tz_localize(None).normalize()
@@ -153,39 +141,11 @@ def download_yahoo():
             if col not in df.columns:
                 df[col] = 0.0
         df = df[["Close", "Adj Close", "Dividends", "Capital Gains", "Stock Splits"]]
-        df.to_csv(raw(f"daily_{tk}.csv"), index_label="Date")   # raw: no cleaning here
-        infos.append({"group": group, "fund": fund, "investor": inv, **get_info(t, tk)})
-    pd.DataFrame(infos).to_csv(raw("fund_info.csv"), index=False)
-    if missing:
-        print(f"  tickers with NO data: {missing}")
-
-
-def get_info(t, ticker):
-    """Current snapshot only - Yahoo keeps no fee history."""
-    row = {"ticker": ticker, "retrieved": dt.date.today().isoformat()}
-    try:
-        info = t.info or {}
-    except Exception as e:  # noqa: BLE001
-        info, row["info_error"] = {}, str(e)
-    # annualReportExpenseRatio and annualHoldingsTurnover are DECIMALS (0.0051 = 0.51%);
-    # netExpenseRatio is in PERCENT (0.51). totalAssets is fund-wide (all share classes), $.
-    for k in ["longName", "fundFamily", "legalType", "annualReportExpenseRatio",
-              "netExpenseRatio", "annualHoldingsTurnover", "totalAssets", "fundInceptionDate"]:
-        row[k] = info.get(k)
-    if row.get("fundInceptionDate") is not None:
-        row["fundInceptionDate"] = (dt.date(1970, 1, 1) +
-                                    dt.timedelta(seconds=int(row["fundInceptionDate"]))).isoformat()
-    try:  # fund vs Morningstar-category average expense ratio
-        ops = t.funds_data.fund_operations
-        if ops is not None and "Annual Report Expense Ratio" in ops.index:
-            v = ops.loc["Annual Report Expense Ratio"]
-            row["category_avg_expense_ratio"] = v.iloc[1] if len(v) > 1 else None
-    except Exception as e:  # noqa: BLE001
-        row["funds_data_error"] = str(e)
-    return row
+        df.to_csv(raw(f"daily_{tk}.csv"), index_label="Date")
 
 
 def download_french():
+    """Monthly factors from the Ken French Data Library (zipped CSV) -> data_raw/ (unchanged)."""
     for zname, csvname in KF_FILES.items():
         print(f"Ken French: {zname}")
         with urllib.request.urlopen(f"{KF_URL}{zname}_CSV.zip", timeout=60) as r:
@@ -196,9 +156,9 @@ def download_french():
 
 
 # ---------------------------------------------------------------------------
-# 3. BUILD (offline)
+# 3. READ AND CLEAN THE RAW FILES (offline)
 # ---------------------------------------------------------------------------
-LOG = []
+LOG = []                        # one entry per cleaning step -> data_clean/cleaning_log.csv
 
 
 def log(step, ticker, n, detail=""):
@@ -206,7 +166,7 @@ def log(step, ticker, n, detail=""):
 
 
 def load_factors():
-    """Parse the monthly block of the Ken French CSVs; convert % to decimals."""
+    """Monthly block of the two Ken French files, joined and converted from % to decimals."""
     def parse(path):
         rows = []
         with open(path, encoding="latin-1") as f:
@@ -227,12 +187,13 @@ def load_factors():
     mom = parse(raw(KF_FILES["F-F_Momentum_Factor"])).rename(columns={"mom": "umd"})
     fac = ff.join(mom, how="inner")[["mktrf", "smb", "hml", "umd", "rf"]]
     fac = fac[fac.index >= pd.Period(FIRST_MONTH, "M")]
-    bad = fac.isna().any(axis=1) | (fac <= -0.99).any(axis=1)
+    bad = fac.isna().any(axis=1) | (fac <= -0.99).any(axis=1)      # French codes missing as -99.99
     log("factors: rows with missing/-99.99 values dropped", "FF", bad.sum())
     return fac[~bad]
 
 
 def load_daily(tk):
+    """One class's daily file, with duplicate dates, bad NAVs and double-counted payouts removed."""
     df = pd.read_csv(raw(f"daily_{tk}.csv"), parse_dates=["Date"], index_col="Date").sort_index()
     log("daily: raw trading days", tk, len(df))
     n0 = len(df)
@@ -243,19 +204,38 @@ def load_daily(tk):
     df = df[~bad].copy()
     for c in ["Dividends", "Capital Gains"]:
         df[c] = df[c].fillna(0.0)
-    # Yahoo usually folds capital gains into 'Dividends'; if a day shows the SAME amount in both
-    # columns it is one distribution reported twice -> count it once.
+    # Yahoo usually folds capital gains into 'Dividends'; the SAME amount in both columns on one
+    # day is one distribution reported twice -> count it once.
     dup = (df["Capital Gains"] > 0) & np.isclose(df["Dividends"], df["Capital Gains"])
     df.loc[dup, "Capital Gains"] = 0.0
     log("daily: distribution double-reported in Dividends and Capital Gains", tk, dup.sum())
     return df
 
 
+def load_fee_history():
+    """
+    The hand-collected annual-report fees (data_raw/expense_ratio_history.csv).
+    Rows still blank (report not filed yet) are dropped; % are converted to decimals.
+    """
+    p = raw(FEE_FILE)
+    if not os.path.exists(p):
+        raise SystemExit(f"Missing data_raw/{FEE_FILE} (typed in from the funds' annual reports).")
+    h = pd.read_csv(p, parse_dates=["fiscal_year_end"])
+    h = h.dropna(subset=["expense_ratio_pct"])
+    h["exp_ratio"] = h["expense_ratio_pct"] / 100.0
+    h["turnover"] = h["turnover_pct"] / 100.0
+    return h.rename(columns={"fiscal_year_end": "date"})
+
+
+# ---------------------------------------------------------------------------
+# 4. CONSTRUCT RETURNS
+# ---------------------------------------------------------------------------
 def monthly_total_return(df):
     """
-    Total return, ALL distributions reinvested on the ex-date (Req 3, Ch 16):
+    Net total return with every distribution reinvested on its ex-date:
         r_d = (NAV_d + Div_d + CapGain_d) / NAV_{d-1} - 1,  compounded within each calendar month.
-    'Close' with auto_adjust=False is the NAV adjusted for splits only, not for distributions.
+    The NAV is struck after the fund deducts its fees, so this return is already NET of fees.
+    Yahoo's Adj Close return is kept only as a cross-check.
     """
     nav = df["Close"]
     dist = df["Dividends"] + df["Capital Gains"]
@@ -271,91 +251,52 @@ def monthly_total_return(df):
     return out
 
 
+def add_fees(m, tk, fees):
+    """
+    Give every month its fund's expense ratio and turnover, then the gross-of-fee return.
+    A month gets the ratio of the fiscal year it falls in (the first fiscal year-end on or after
+    it). Months after the latest annual report keep the last ratio, labelled '(carried forward)'.
+    Monthly fee = annual ratio / 12;  gross return = net return + monthly fee (Wermers, 2000).
+    """
+    m = m.copy()
+    h = fees[fees["ticker"] == tk].sort_values("date")
+    if h.empty:
+        raise SystemExit(f"No fee rows for {tk} in data_raw/{FEE_FILE}.")
+    month_end = pd.DataFrame({"date": m.index.to_timestamp(how="end").normalize()})
+    cols = ["date", "exp_ratio", "turnover", "source"]
+    this_fy = pd.merge_asof(month_end, h[cols], on="date", direction="forward")   # fiscal year it falls in
+    last_fy = pd.merge_asof(month_end, h[cols], on="date", direction="backward")  # latest year reported
+    carried = this_fy["exp_ratio"].isna() & last_fy["exp_ratio"].notna()
+    for c in ("exp_ratio", "turnover", "source"):
+        this_fy[c] = this_fy[c].where(~carried, last_fy[c])
+    m["er_annual"] = this_fy["exp_ratio"].to_numpy()
+    m["turnover_annual"] = this_fy["turnover"].to_numpy()
+    m["er_source"] = this_fy["source"].where(~carried, this_fy["source"] + " (carried forward)").to_numpy()
+    log("fees: months using the last reported fiscal year (carried forward)", tk, carried.sum())
+    log("fees: months with expense ratio from annual reports", tk, m["er_annual"].notna().sum())
+    log("fees: months with no expense ratio (gross return set to missing)", tk,
+        m["er_annual"].isna().sum())
+    m["er_monthly"] = m["er_annual"] / 12.0
+    m["ret_gross"] = m["ret_net"] + m["er_monthly"]
+    return m
+
+
 def winsorize(s, lo, hi):
+    """Clip a series at its lo/hi quantiles; also return how many values were clipped."""
     a, b = s.quantile(lo), s.quantile(hi)
     return s.clip(a, b), int(((s < a) | (s > b)).sum())
 
 
-FEE_FILE = "expense_ratio_history.csv"
-FEE_COLS = ["ticker", "fiscal_year_end", "expense_ratio_pct", "turnover_pct", "source"]
-
-
-def write_fee_template():
-    """
-    Blank fee-history file: one row per share class per fiscal year, FY2011..FY2026.
-    Fill expense_ratio_pct (the NET 'ratio of expenses to average net assets', in %) and
-    turnover_pct from the Financial Highlights table of each annual report (Form N-CSR), and
-    label the row in 'source' (e.g. 'N-CSR FY2020'). Each report covers 5 fiscal years.
-    FISCAL_YEAR_END dates are best guesses: confirm each on the annual report cover.
-    """
-    p = raw(FEE_FILE)
-    if os.path.exists(p):
-        raise SystemExit(f"data_raw/{FEE_FILE} already exists - not overwritten")
-    rows = []
-    for _, fund, tk, _ in universe():
-        mmdd = FISCAL_YEAR_END[fund]
-        rows += [{"ticker": tk, "fiscal_year_end": f"{y}-{mmdd}", "expense_ratio_pct": "",
-                  "turnover_pct": "", "source": ""} for y in range(2011, 2027)]
-    pd.DataFrame(rows, columns=FEE_COLS).to_csv(p, index=False)
-    print(f"wrote data_raw/{FEE_FILE}: {len(rows)} blank rows")
-
-
-def expense_ratio_history():
-    """Fee history typed in from annual reports; rows with no expense ratio are ignored."""
-    p = raw(FEE_FILE)
-    if not os.path.exists(p):
-        return None
-    h = pd.read_csv(p, parse_dates=["fiscal_year_end"])
-    h = h.dropna(subset=["expense_ratio_pct"])
-    h["exp_ratio"] = h["expense_ratio_pct"] / 100.0               # % -> decimal
-    h["turnover"] = h["turnover_pct"] / 100.0
-    h["source"] = h["source"].fillna("annual report").astype(str)
-    return h.rename(columns={"fiscal_year_end": "date"})
-
-
-def attach_expense_ratio(m, tk, hist, snap):
-    """
-    Annual expense ratio for every month, converted to monthly as ER/12 (Req 3).
-    A fiscal year's ratio applies to every month of that fiscal year: each month is matched to the
-    first fiscal year-end on or after it (merge_asof 'forward'). Months after the last reported
-    fiscal year keep the last known ratio. No history for a class -> Yahoo snapshot (constant).
-    The NAV (Yahoo Close) is already net of this fee, so gross = net + ER/12 (Wermers, 2000).
-    """
-    m = m.copy()
-    h = None if hist is None else hist[hist["ticker"] == tk].sort_values("date")
-    if h is not None and len(h):
-        key = pd.DataFrame({"date": m.index.to_timestamp(how="end").normalize()})
-        cols = ["date", "exp_ratio", "turnover", "source"]
-        fw = pd.merge_asof(key, h[cols], on="date", direction="forward")
-        bw = pd.merge_asof(key, h[cols], on="date", direction="backward")
-        carried = fw["exp_ratio"].isna() & bw["exp_ratio"].notna()
-        for c in ("exp_ratio", "turnover", "source"):
-            fw[c] = fw[c].where(~carried, bw[c])
-        m["er_annual"] = fw["exp_ratio"].to_numpy()
-        m["turnover_annual"] = fw["turnover"].to_numpy()
-        m["er_source"] = fw["source"].where(~carried, fw["source"] + " (carried forward)").to_numpy()
-        log("fees: months using the last reported fiscal year (carried forward)", tk, carried.sum())
-        log("fees: months with expense ratio from annual reports", tk, m["er_annual"].notna().sum())
-    else:
-        m["er_annual"] = snap
-        m["turnover_annual"] = np.nan
-        m["er_source"] = "yahoo_snapshot (history TBD)" if pd.notna(snap) else "missing"
-        log("fees: months using Yahoo snapshot (history TBD)", tk, len(m))
-    log("fees: months with no expense ratio (gross return set to missing)", tk,
-        m["er_annual"].isna().sum())
-    m["er_monthly"] = m["er_annual"] / 12.0
-    m["ret_gross"] = m["ret_net"] + m["er_monthly"]                  # Wermers (2000) gross-of-fee
-    return m
-
-
+# ---------------------------------------------------------------------------
+# 5. BUILD data_clean/
+# ---------------------------------------------------------------------------
 def build():
-    for f in [KF_FILES["F-F_Research_Data_Factors"], KF_FILES["F-F_Momentum_Factor"], "fund_info.csv"]:
+    for f in KF_FILES.values():
         if not os.path.exists(raw(f)):
             raise SystemExit(f"Missing data_raw/{f}. Run once with:  python get_data.py --download")
     fac = load_factors()
     last = fac.index.max()
-    info = pd.read_csv(raw("fund_info.csv")).set_index("ticker")
-    hist = expense_ratio_history()
+    fees = load_fee_history()
 
     rets, dists, checks = [], [], []
     for group, fund, tk, inv in universe():
@@ -365,7 +306,7 @@ def build():
         d = load_daily(tk)
         m = monthly_total_return(d)
 
-        # sample window: drop inception month (no prior NAV -> incomplete month), keep FIRST_MONTH..last
+        # sample window: FIRST_MONTH .. last factor month, minus the (incomplete) inception month
         first = d.index.min().to_period("M")
         keep = (m.index > first) & (m.index >= pd.Period(FIRST_MONTH, "M")) & (m.index <= last)
         log("sample: months outside Jan-2011..factor end, or inception month", tk, (~keep).sum())
@@ -376,17 +317,17 @@ def build():
         m = m.reindex(full)
         m.index.name = "month"
 
-        m = attach_expense_ratio(m, tk, hist, info["annualReportExpenseRatio"].get(tk, np.nan))
+        m = add_fees(m, tk, fees)
         m = m.join(fac[["rf"]])
         m["ex_net"] = m["ret_net"] - m["rf"]
         m["ex_gross"] = m["ret_gross"] - m["rf"]
 
-        # outliers: flag, do not drop (fund NAVs are struck by the fund; big months are real)
+        # outliers: flagged, not dropped (fund NAVs are struck by the fund; big months are real)
         z = (m["ret_net"] - m["ret_net"].mean()) / m["ret_net"].std()
         m["outlier_flag"] = z.abs() > OUTLIER_Z
         log(f"outliers: |z| > {OUTLIER_Z} flagged (kept)", tk, m["outlier_flag"].sum())
 
-        # return-construction check vs Yahoo Adj Close
+        # cross-check our return against Yahoo's Adj Close return
         diff = m["ret_net"] - m["ret_adjclose"]
         bad = diff.abs() > CHECK_TOL
         log(f"check: |TR - Adj Close TR| > {CHECK_TOL:.1%}", tk, bad.sum())
@@ -414,15 +355,15 @@ def build():
     fac.reset_index().assign(month=lambda x: x["month"].astype(str)) \
         .to_csv(clean("factors_monthly.csv"), index=False)
 
-    fund_level(cls, fac)
-    index_returns(cls)
-    fee_table(cls, info)
+    write_fund_monthly(cls, fac)
+    write_index_returns(cls)
+    write_fee_table(cls)
     pd.DataFrame(LOG).to_csv(clean("cleaning_log.csv"), index=False)
-    summary(cls)
+    print_summary(cls)
 
 
-def fund_level(cls, fac):
-    """One series per (fund, investor class) + factors; winsorized copies for sensitivity (Req 10)."""
+def write_fund_monthly(cls, fac):
+    """fund_monthly.csv: excess returns + factors per class and month, plus winsorized copies."""
     keep = ["group", "fund", "investor", "ticker", "month", "ret_net", "ret_gross", "er_monthly"]
     f = cls[keep].merge(fac.reset_index(), on="month", how="left").reset_index(drop=True)
     f["ex_net"] = f["ret_net"] - f["rf"]
@@ -440,27 +381,23 @@ def fund_level(cls, fac):
         .to_csv(clean("fund_monthly.csv"), index=False)
 
 
-def index_returns(cls):
+def write_index_returns(cls):
+    """index_returns.csv: the index funds' monthly net returns, one column per ticker."""
     idx = cls[cls["group"] == "index"].pivot(index="month", columns="ticker", values="ret_net").dropna()
     idx.index = idx.index.astype(str)
     idx.to_csv(clean("index_returns.csv"))
 
 
-def fee_table(cls, info):
+def write_fee_table(cls):
+    """fees.csv: one row per class with its minimum and its latest expense ratio and turnover."""
     ok = cls.dropna(subset=["ret_net"])
-    last = ok.sort_values("month").groupby("ticker").tail(1)
+    latest = ok.sort_values("month").groupby("ticker").tail(1)
     span = ok.groupby("ticker")["month"].agg(["min", "max", "count"])
-    t = last[["group", "fund", "investor", "ticker", "min_investment", "er_annual",
-              "er_source", "turnover_annual"]].set_index("ticker")
+    t = latest[["group", "fund", "investor", "ticker", "min_investment", "er_annual",
+                "turnover_annual", "er_source"]].set_index("ticker")
+    t = t.rename(columns={"turnover_annual": "turnover"})
     t = t.join(span.rename(columns={"min": "first_month", "max": "last_month", "count": "n_months"}))
-    for k, new in [("longName", "share_class_name"), ("annualHoldingsTurnover", "turnover"),
-                   ("totalAssets", "fund_total_assets_usd"),
-                   ("category_avg_expense_ratio", "category_avg_er"), ("retrieved", "snapshot_date")]:
-        if k in info:
-            t[new] = info[k]
-    # latest turnover: annual report if typed in, else Yahoo snapshot
-    t["turnover"] = t.pop("turnover_annual").fillna(t["turnover"])
-    t["min_source_url"] = [SOURCES.get(tk, "") for tk in t.index]
+    t["min_source_url"] = [MIN_INVEST_URL.get(tk, "") for tk in t.index]
     order = {"inst": 0, "index": 1}
     t = t.reset_index().assign(o=lambda x: x["investor"].map(order)) \
         .sort_values(["o", "fund"]).drop(columns="o")
@@ -468,7 +405,7 @@ def fee_table(cls, info):
         .to_csv(clean("fees.csv"), index=False)
 
 
-def summary(cls):
+def print_summary(cls):
     lg = pd.DataFrame(LOG)
     print("\nCleaning steps (observations affected, all share classes):")
     print(lg.groupby("step")["n_affected"].sum().to_string())
@@ -478,18 +415,14 @@ def summary(cls):
 
 
 # ---------------------------------------------------------------------------
-# 4. RUN
+# 6. RUN
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="CFM301 Project 5 data stage")
-    ap.add_argument("--download", action="store_true", help="pull raw data (internet needed)")
-    ap.add_argument("--fee-template", action="store_true",
-                    help=f"write a blank data_raw/{FEE_FILE} to fill in from annual reports, then stop")
+    ap.add_argument("--download", action="store_true",
+                    help="re-download the Yahoo and Ken French files first (internet needed)")
     a = ap.parse_args()
     os.makedirs(RAW_DIR, exist_ok=True)
-    if a.fee_template:
-        write_fee_template()
-        raise SystemExit(0)
     if a.download:
         download_yahoo()
         download_french()
