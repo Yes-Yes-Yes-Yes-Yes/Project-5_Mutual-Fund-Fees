@@ -1,39 +1,43 @@
-# CFM 301 Project 5 — Are the Fees Justified? Institutional Share Classes
+# Project-4_Credit-Spread-Liquidity
 
-## Environment
-- Python 3.14.3
-- pandas 3.0.6, numpy 2.5.3
-- Only for re-downloading: yfinance 1.8.0
+## Program Requirements
+* __Language:__ Python 3.14
+* __Required Packages:__\
+  Most of the required packages can be installed inside of the Python terminal using `python -m pip install <insert-package-name>` OR `py -m pip install <insert-package-name>`.
+    | Package           | Version                | Installation Purposes                                                                  |
+    | :---------------- | :--------------------- | :------------------------------------------------------------------------------------- |
+    | typing_extensions | 4.16                   | Add labels to classTypes and dataTypes to better define program structure.             | 
+    | yFinance          | 26.30                  | Used to obtain data from Yahoo Finance ONCE.                                           |
+    | polars            | 2.00                   | Faster alternative to Pandas to handle basic dataFrame structure and updates.          |
+    | pandas            | 2.5.4                  | Used INSTEAD of Polars when required from OTHER packages ( like sci.py or statsmodels) |
+    | pyarrow           | 26.0.0                 | Transforms Polars dataFrames --> Pandas dataFrames                                     |
+    | statsmodels       |	0.15.0	               | Helps calculate multiple-linear regression models.                                     |
+    | scipy             |	2.5.4	                 | Helps calculate multiple-linear regression models under SPECIFIC conditions.           |
+    | fastexcel         | 0.21.0                 | Converts Excel files into dataFrames.                                                  |
+    | xlsxwriter        | 3.2.9                  | Handles outputs from dataFrames into Excel.                                            |
 
-```
-pip install pandas==3.0.6 numpy==2.5.3     # needed to reproduce the results
-pip install yfinance==1.8.0                 # needed only to re-download raw data
-```
 
-## How to run (from this folder)
-1. `python get_data.py` builds every file in `data_clean/` from the files in `data_raw/`. It needs no internet connection and no login.
-2. *(Optional: refreshes the raw data)* `python get_data.py --download` pulls fresh data from Yahoo Finance and Ken French.
+## Program Instructions
+  - To run the program in its *ENTIRETY* in VS-Code, EITHER:
+      * Set the current-working-directory to `~\<project-name>\` AND press `Run Python File` inside of main.py.
+      * Run the program as `& "<python.exe file-path>" "<main.py file-path>"` inside of the Python terminal.\
+        __EX:__  `& "C:\Users\Justin Yi Cheng\AppData\Local\Python\pythoncore-3.14-64\python.exe" "c:/Users/Justin Yi Cheng/UWaterloo/CFM 301/CFM-301_Factor-Testing/main.py"`\
+        
+    All analysis should be output inside of the `~\_OUTPUT\` directory AND/OR the _OUTPUT.txt file.
 
-## Funds
-| Fund | Institutional, main analysis (min.) | Retail, sensitivity only (min., load) |
-|---|---|---|
-| JPMorgan Equity Income | HLIEX ($1,000,000) | OIEIX ($1,000, 5.25%) |
-| BlackRock Equity Dividend | MADVX ($2,000,000) | MDDVX ($1,000, 5.25%) |
-| Lord Abbett Affiliated | LAFYX ($1,000,000) | LAFFX ($1,000, 5.75%) |
-| American Century Value | AVLIX ($5,000,000) | TWVLX ($2,500, none) |
-| Goldman Sachs Equity Income | GSIIX ($1,000,000) | GSGRX ($1,000, 5.50%) |
+  - All relevant data analysis are found inside the OUTPUT_DIRECTORY class or CHILDREN of the OUTPUT_DIRECTORY class. \
+    File-specific data-cleaning is done in `input.py`, while data-cleaning that requires "additional information" is done in the OUTPUT_DIRECTORY class.\
+    __EX:__ Information regarding globalFilters OR information from other files.
+      * __All other files, *while necessary to RUN the program*, are used to define program structure, file structure, or make debugging easier.__
 
-Benchmark: Vanguard Institutional index funds VINIX, VSCIX and VIVIX, each with a $5,000,000 minimum. Minimums and loads aren't on Yahoo; they are entered in `get_data.py` (`MIN_INVEST`, `MAX_LOAD`), with the source page for each class in `SOURCES`. All 13 classes have 4,017 trading days (Dec 2010 to Nov 2026), giving 189 months (Jan 2011 to Sep 2026).
-
-## Data
-| File | Source |
-|---|---|
-| `data_raw/daily_<TICKER>.csv` | Yahoo Finance: Date, Close (NAV, split-adjusted only), Adj Close, Dividends (capital gains included), Capital Gains, Stock Splits |
-| `data_raw/fund_info.csv` | Yahoo Finance snapshot: expense ratio, turnover, total assets, inception date, category average expense ratio |
-| `data_raw/F-F_Research_Data_Factors.csv`, `F-F_Momentum_Factor.csv` | Ken French Data Library: Mkt-RF, SMB, HML, RF, Mom (% per month) |
-
-## Construction (in `get_data.py`)
-- **Total return**: r_d = (NAV_d + Div_d + CapGain_d) / NAV_{d−1} − 1, compounded within each month. It is checked against Yahoo Adj Close.
-- **Fees**: annual expense ratio ÷ 12; gross return = net return + ER/12. The expense ratio is today's snapshot, applied to all 189 months. A `data_raw/expense_ratio_history.csv` (`ticker,date,exp_ratio,source_url`) is used instead if it exists.
-- **Cleaning**: removes duplicate dates, missing NAVs and double-reported distributions, and trims to the sample window. Outliers (|z| > 4) are flagged and kept. Winsorized copies (1/99 and 5/95) and load-adjusted retail returns are for the sensitivity analysis only. Every step's count is in `cleaning_log.csv`.
-- **Output for analysis**: `fund_monthly.csv`, one row per fund, investor group (`inst`, `index` or `retail`) and month, with the factors merged in.
+  - Comments assume the *reader has a basic understanding of Python, the given packages, and abstraction.*   \
+    As a result, comments are only added to explain BLOCKS of code OR provide explanations for confusing implementations.\
+    __EX__: I will NOT explain `(pl.col('gvkey').cast(pl.Utf8)).alias('Global-Company-Key')`, but I may explain that:
+    ```
+    column_dataTypes: dict[str, pl.Expr] = {
+      'gvkey':    (pl.col('gvkey').cast(pl.Utf8)).alias('Global-Company-Key'),
+      'conm':     (pl.col('conm').cast(pl.Utf8)).alias('Company-Name'),
+      'datadate': (pl.col('datadate').str.to_date(format = '%Y-%m-%d')).alias('Date')
+    };
+    ```
+    attempts to generally define standardized dataTypes and naming conventions for columns inside of specific fileTypes.
