@@ -1,0 +1,1492 @@
+BASE: BEGIN DATA CLEANING
+ * New Date-Range: 
+    > Start Date: 2011-01-01
+    > End   Date: 2025-10-01
+
+ * Impact of Date-Alignmnt: 
+shape: (11, 4)
+┌──────────────────────────────────┬───────────┬──────────┬─────────┐
+│ LAZYFRAME | column               ┆ numBefore ┆ numAfter ┆ numDiff │
+│ ---                              ┆ ---       ┆ ---      ┆ ---     │
+│ str                              ┆ i64       ┆ i64      ┆ i64     │
+╞══════════════════════════════════╪═══════════╪══════════╪═════════╡
+│ F-F_RESEARCH_DATA_FACTORS | Date ┆ 1203      ┆ 178      ┆ 1025    │
+│ F-F_MOMENTUM_FACTOR | Date       ┆ 1197      ┆ 178      ┆ 1019    │
+│ HLIEX | Date                     ┆ 473       ┆ 178      ┆ 295     │
+│ MADVX | Date                     ┆ 456       ┆ 178      ┆ 278     │
+│ VINIX | Date                     ┆ 436       ┆ 178      ┆ 258     │
+│ GSIIX | Date                     ┆ 366       ┆ 178      ┆ 188     │
+│ VSCIX | Date                     ┆ 352       ┆ 178      ┆ 174     │
+│ AVLIX | Date                     ┆ 352       ┆ 178      ┆ 174     │
+│ LAFYX | Date                     ┆ 344       ┆ 178      ┆ 166     │
+│ VIVIX | Date                     ┆ 340       ┆ 178      ┆ 162     │
+│ EXPENSE_RATIO | Date             ┆ 178       ┆ 178      ┆ 0       │
+└──────────────────────────────────┴───────────┴──────────┴─────────┘
+
+BASE: DATA CLEANING COMPLETE!
+
+
+SENSITIVITY_A: BEGIN DATA CLEANING
+ * New Date-Range: 
+    > Start Date: 2011-01-01
+    > End   Date: 2025-10-01
+
+ * Impact of Date-Alignmnt: 
+shape: (11, 4)
+┌──────────────────────────────────┬───────────┬──────────┬─────────┐
+│ LAZYFRAME | column               ┆ numBefore ┆ numAfter ┆ numDiff │
+│ ---                              ┆ ---       ┆ ---      ┆ ---     │
+│ str                              ┆ i64       ┆ i64      ┆ i64     │
+╞══════════════════════════════════╪═══════════╪══════════╪═════════╡
+│ F-F_RESEARCH_DATA_FACTORS | Date ┆ 1203      ┆ 178      ┆ 1025    │
+│ F-F_MOMENTUM_FACTOR | Date       ┆ 1197      ┆ 178      ┆ 1019    │
+│ HLIEX | Date                     ┆ 473       ┆ 178      ┆ 295     │
+│ MADVX | Date                     ┆ 456       ┆ 178      ┆ 278     │
+│ VINIX | Date                     ┆ 436       ┆ 178      ┆ 258     │
+│ GSIIX | Date                     ┆ 366       ┆ 178      ┆ 188     │
+│ VSCIX | Date                     ┆ 352       ┆ 178      ┆ 174     │
+│ AVLIX | Date                     ┆ 352       ┆ 178      ┆ 174     │
+│ LAFYX | Date                     ┆ 344       ┆ 178      ┆ 166     │
+│ VIVIX | Date                     ┆ 340       ┆ 178      ┆ 162     │
+│ EXPENSE_RATIO | Date             ┆ 178       ┆ 178      ┆ 0       │
+└──────────────────────────────────┴───────────┴──────────┴─────────┘
+
+ * Impact of Winsorization:
+shape: (26, 4)
+┌──────────────────────────────────────────────────┬───────────┬──────────┬─────────┐
+│ LAZYFRAME | column                               ┆ numBefore ┆ numAfter ┆ numDiff │
+│ ---                                              ┆ ---       ┆ ---      ┆ ---     │
+│ str                                              ┆ i64       ┆ i64      ┆ i64     │
+╞══════════════════════════════════════════════════╪═══════════╪══════════╪═════════╡
+│ LAFYX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 8       │
+│ MADVX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 8       │
+│ AVLIX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 8       │
+│ GSIIX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 8       │
+│ VINIX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 8       │
+│ VSCIX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 8       │
+│ VIVIX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 8       │
+│ HLIEX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 8       │
+│ F-F_RESEARCH_DATA_FACTORS | Market-Excess-Return ┆ 178       ┆ 178      ┆ 8       │
+│ F-F_RESEARCH_DATA_FACTORS | Huge-Minus-Low       ┆ 178       ┆ 178      ┆ 8       │
+│ F-F_RESEARCH_DATA_FACTORS | Small-Minus-Big      ┆ 178       ┆ 178      ┆ 8       │
+│ F-F_RESEARCH_DATA_FACTORS | Risk-Free-Rate       ┆ 178       ┆ 178      ┆ 4       │
+│ F-F_MOMENTUM_FACTOR | Momentum                   ┆ 178       ┆ 178      ┆ 8       │
+│ EXPENSE_RATIO | Expense_Ratio [GSIIX]            ┆ 178       ┆ 178      ┆ 0       │
+│ EXPENSE_RATIO | Expense_Ratio [AVLIX]            ┆ 178       ┆ 178      ┆ 0       │
+│ EXPENSE_RATIO | Expense_Ratio [LAFYX]            ┆ 178       ┆ 178      ┆ 0       │
+│ EXPENSE_RATIO | Expense_Ratio [MADVX]            ┆ 178       ┆ 178      ┆ 0       │
+│ EXPENSE_RATIO | Expense_Ratio [HLIEX]            ┆ 178       ┆ 178      ┆ 4       │
+│ EXPENSE_RATIO | Expense_Ratio [VIVIX]            ┆ 178       ┆ 178      ┆ 0       │
+│ EXPENSE_RATIO | Expense_Ratio [VSCIX]            ┆ 178       ┆ 178      ┆ 0       │
+│ EXPENSE_RATIO | Expense_Ratio [VINIX]            ┆ 178       ┆ 178      ┆ 0       │
+│ TNA_HISTORY | Total-Net-Asset [GSIIX]            ┆ 79        ┆ 79       ┆ 63      │
+│ TNA_HISTORY | Total-Net-Asset [AVLIX]            ┆ 79        ┆ 79       ┆ 63      │
+│ TNA_HISTORY | Total-Net-Asset [LAFYX]            ┆ 79        ┆ 79       ┆ 64      │
+│ TNA_HISTORY | Total-Net-Asset [MADVX]            ┆ 79        ┆ 79       ┆ 63      │
+│ TNA_HISTORY | Total-Net-Asset [HLIEX]            ┆ 79        ┆ 79       ┆ 63      │
+└──────────────────────────────────────────────────┴───────────┴──────────┴─────────┘
+
+SENSITIVITY_A: DATA CLEANING COMPLETE!
+
+
+SENSITIVITY_B: BEGIN DATA CLEANING
+ * New Date-Range: 
+    > Start Date: 2011-01-01
+    > End   Date: 2025-10-01
+
+ * Impact of Date-Alignmnt: 
+shape: (11, 4)
+┌──────────────────────────────────┬───────────┬──────────┬─────────┐
+│ LAZYFRAME | column               ┆ numBefore ┆ numAfter ┆ numDiff │
+│ ---                              ┆ ---       ┆ ---      ┆ ---     │
+│ str                              ┆ i64       ┆ i64      ┆ i64     │
+╞══════════════════════════════════╪═══════════╪══════════╪═════════╡
+│ F-F_RESEARCH_DATA_FACTORS | Date ┆ 1203      ┆ 178      ┆ 1025    │
+│ F-F_MOMENTUM_FACTOR | Date       ┆ 1197      ┆ 178      ┆ 1019    │
+│ HLIEX | Date                     ┆ 473       ┆ 178      ┆ 295     │
+│ MADVX | Date                     ┆ 456       ┆ 178      ┆ 278     │
+│ VINIX | Date                     ┆ 436       ┆ 178      ┆ 258     │
+│ GSIIX | Date                     ┆ 366       ┆ 178      ┆ 188     │
+│ VSCIX | Date                     ┆ 352       ┆ 178      ┆ 174     │
+│ AVLIX | Date                     ┆ 352       ┆ 178      ┆ 174     │
+│ LAFYX | Date                     ┆ 344       ┆ 178      ┆ 166     │
+│ VIVIX | Date                     ┆ 340       ┆ 178      ┆ 162     │
+│ EXPENSE_RATIO | Date             ┆ 178       ┆ 178      ┆ 0       │
+└──────────────────────────────────┴───────────┴──────────┴─────────┘
+
+ * Impact of Winsorization:
+shape: (26, 4)
+┌──────────────────────────────────────────────────┬───────────┬──────────┬─────────┐
+│ LAZYFRAME | column                               ┆ numBefore ┆ numAfter ┆ numDiff │
+│ ---                                              ┆ ---       ┆ ---      ┆ ---     │
+│ str                                              ┆ i64       ┆ i64      ┆ i64     │
+╞══════════════════════════════════════════════════╪═══════════╪══════════╪═════════╡
+│ EXPENSE_RATIO | Expense_Ratio [GSIIX]            ┆ 178       ┆ 178      ┆ 0       │
+│ EXPENSE_RATIO | Expense_Ratio [VSCIX]            ┆ 178       ┆ 178      ┆ 0       │
+│ EXPENSE_RATIO | Expense_Ratio [VIVIX]            ┆ 178       ┆ 178      ┆ 0       │
+│ EXPENSE_RATIO | Expense_Ratio [HLIEX]            ┆ 178       ┆ 178      ┆ 0       │
+│ EXPENSE_RATIO | Expense_Ratio [MADVX]            ┆ 178       ┆ 178      ┆ 0       │
+│ EXPENSE_RATIO | Expense_Ratio [LAFYX]            ┆ 178       ┆ 178      ┆ 0       │
+│ EXPENSE_RATIO | Expense_Ratio [AVLIX]            ┆ 178       ┆ 178      ┆ 0       │
+│ EXPENSE_RATIO | Expense_Ratio [VINIX]            ┆ 178       ┆ 178      ┆ 0       │
+│ F-F_MOMENTUM_FACTOR | Momentum                   ┆ 178       ┆ 178      ┆ 2       │
+│ F-F_RESEARCH_DATA_FACTORS | Market-Excess-Return ┆ 178       ┆ 178      ┆ 2       │
+│ F-F_RESEARCH_DATA_FACTORS | Small-Minus-Big      ┆ 178       ┆ 178      ┆ 2       │
+│ F-F_RESEARCH_DATA_FACTORS | Huge-Minus-Low       ┆ 178       ┆ 178      ┆ 2       │
+│ F-F_RESEARCH_DATA_FACTORS | Risk-Free-Rate       ┆ 178       ┆ 178      ┆ 1       │
+│ VSCIX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 2       │
+│ VIVIX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 2       │
+│ VINIX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 2       │
+│ GSIIX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 2       │
+│ AVLIX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 2       │
+│ MADVX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 2       │
+│ LAFYX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 2       │
+│ HLIEX | Net-Total-Return                         ┆ 178       ┆ 178      ┆ 2       │
+│ TNA_HISTORY | Total-Net-Asset [HLIEX]            ┆ 79        ┆ 79       ┆ 63      │
+│ TNA_HISTORY | Total-Net-Asset [MADVX]            ┆ 79        ┆ 79       ┆ 63      │
+│ TNA_HISTORY | Total-Net-Asset [AVLIX]            ┆ 79        ┆ 79       ┆ 63      │
+│ TNA_HISTORY | Total-Net-Asset [LAFYX]            ┆ 79        ┆ 79       ┆ 64      │
+│ TNA_HISTORY | Total-Net-Asset [GSIIX]            ┆ 79        ┆ 79       ┆ 63      │
+└──────────────────────────────────────────────────┴───────────┴──────────┴─────────┘
+
+SENSITIVITY_B: DATA CLEANING COMPLETE!
+
+
+BASE: BEGIN DATA ANALYSIS...
+ * ANALYZING [MADVX] FACTOR STATISTICS...
+         - marketExcess ~ capm         OLS Results -- 
+            > Alpha:       -0.0007996853824735166
+            > T-Statistic: -0.6161994109088448
+            > Track Error: 0.016734598140631482
+            > Info Ratio:  -0.04778635111242297
+            > R-Squared:   0.8122896899461615
+         - grossMarketExcess ~ capm    OLS Results -- 
+            > Alpha:       -0.00021630220584128545
+
+         - marketExcess ~ fama         OLS Results -- 
+            > Alpha:       -0.0005791380048048233
+            > T-Statistic: -0.6603251146209299
+            > Track Error: 0.01111096604567415
+            > Info Ratio:  -0.0521231009458714
+            > R-Squared:   0.9172512975916031
+         - grossMarketExcess ~ fama    OLS Results -- 
+            > Alpha:       4.402109351960202e-06
+
+         - marketExcess ~ carhart      OLS Results -- 
+            > Alpha:       -0.000440174012011876
+            > T-Statistic: -0.4985767979306824
+            > Track Error: 0.011062010451295422
+            > Info Ratio:  -0.03979150209176753
+            > R-Squared:   0.9179788828242502
+         - grossMarketExcess ~ carhart OLS Results -- 
+            > Alpha:       0.00014333405558078393
+   COMPLETED ANALYZING [MADVX] FACTOR STATISTICS!
+
+
+
+
+ * ANALYZING [LAFYX] FACTOR STATISTICS...
+         - marketExcess ~ capm         OLS Results -- 
+            > Alpha:       -0.002312832593887755
+            > T-Statistic: -2.1422234962136533
+            > Track Error: 0.01392184613717177
+            > Info Ratio:  -0.1661297338800792
+            > R-Squared:   0.8883995552539782
+         - grossMarketExcess ~ capm    OLS Results -- 
+            > Alpha:       -0.001919483462747817
+
+         - marketExcess ~ fama         OLS Results -- 
+            > Alpha:       -0.002158860599225838
+            > T-Statistic: -2.858093348424871
+            > Track Error: 0.009569202856541186
+            > Info Ratio:  -0.22560506152820384
+            > R-Squared:   0.9472741258769936
+         - grossMarketExcess ~ fama    OLS Results -- 
+            > Alpha:       -0.0017653364893921893
+
+         - marketExcess ~ carhart      OLS Results -- 
+            > Alpha:       -0.0022760903537572905
+            > T-Statistic: -2.992920161521094
+            > Track Error: 0.009528753597652845
+            > Info Ratio:  -0.23886548544165787
+            > R-Squared:   0.9477189309519367
+         - grossMarketExcess ~ carhart OLS Results -- 
+            > Alpha:       -0.0018826505774443107
+   COMPLETED ANALYZING [LAFYX] FACTOR STATISTICS!
+
+
+
+
+ * ANALYZING [AVLIX] FACTOR STATISTICS...
+         - marketExcess ~ capm         OLS Results -- 
+            > Alpha:       -0.0017348874417280145
+            > T-Statistic: -1.141257668288965
+            > Track Error: 0.019602208473682856
+            > Info Ratio:  -0.08850469293075855
+            > R-Squared:   0.7884800332001893
+         - grossMarketExcess ~ capm    OLS Results -- 
+            > Alpha:       -0.0010754421059903873
+
+         - marketExcess ~ fama         OLS Results -- 
+            > Alpha:       -0.0009694503527089268
+            > T-Statistic: -1.1656893751564839
+            > Track Error: 0.010535867619347791
+            > Info Ratio:  -0.09201428754938545
+            > R-Squared:   0.938894264957597
+         - grossMarketExcess ~ fama    OLS Results -- 
+            > Alpha:       -0.0003100208573119078
+
+         - marketExcess ~ carhart      OLS Results -- 
+            > Alpha:       -0.0005192314719727957
+            > T-Statistic: -0.6518531390680313
+            > Track Error: 0.009980515591538449
+            > Info Ratio:  -0.05202451388513473
+            > R-Squared:   0.9451663296124674
+         - grossMarketExcess ~ carhart OLS Results -- 
+            > Alpha:       0.00014021946138891145
+   COMPLETED ANALYZING [AVLIX] FACTOR STATISTICS!
+
+
+
+
+ * ANALYZING [GSIIX] FACTOR STATISTICS...
+         - marketExcess ~ capm         OLS Results -- 
+            > Alpha:       -0.0015543640240943666
+            > T-Statistic: -1.3834557967070151
+            > Track Error: 0.014487880580096991
+            > Info Ratio:  -0.1072871919050537
+            > R-Squared:   0.8585410761059651
+         - grossMarketExcess ~ capm    OLS Results -- 
+            > Alpha:       -0.0009363593685934116
+
+         - marketExcess ~ fama         OLS Results -- 
+            > Alpha:       -0.0015077523739598468
+            > T-Statistic: -1.8507632255079776
+            > Track Error: 0.01032064238157896
+            > Info Ratio:  -0.14609094261913327
+            > R-Squared:   0.9282149356155984
+         - grossMarketExcess ~ fama    OLS Results -- 
+            > Alpha:       -0.0008896406484357821
+
+         - marketExcess ~ carhart      OLS Results -- 
+            > Alpha:       -0.001558634345952267
+            > T-Statistic: -1.8935471652624105
+            > Track Error: 0.010313589585662534
+            > Info Ratio:  -0.15112433290141844
+            > R-Squared:   0.9283130133128261
+         - grossMarketExcess ~ carhart OLS Results -- 
+            > Alpha:       -0.0009405164617977156
+   COMPLETED ANALYZING [GSIIX] FACTOR STATISTICS!
+
+
+
+
+ * ANALYZING [HLIEX] FACTOR STATISTICS...
+         - marketExcess ~ capm         OLS Results -- 
+            > Alpha:       -0.000430568066498169
+            > T-Statistic: -0.35364456036405606
+            > Track Error: 0.015699732166709852
+            > Info Ratio:  -0.027425185469797855
+            > R-Squared:   0.8310292632212747
+         - grossMarketExcess ~ capm    OLS Results -- 
+            > Alpha:       0.00018862707708951326
+
+         - marketExcess ~ fama         OLS Results -- 
+            > Alpha:       -0.00026441008244445374
+            > T-Statistic: -0.30524510209865763
+            > Track Error: 0.010973795879731392
+            > Info Ratio:  -0.024094678390439113
+            > R-Squared:   0.9174454971788718
+         - grossMarketExcess ~ fama    OLS Results -- 
+            > Alpha:       0.0003549810186987772
+
+         - marketExcess ~ carhart      OLS Results -- 
+            > Alpha:       -0.0004341790292979525
+            > T-Statistic: -0.49910835786254604
+            > Track Error: 0.010899729780007528
+            > Info Ratio:  -0.039833925983590084
+            > R-Squared:   0.9185561166323286
+         - grossMarketExcess ~ carhart OLS Results -- 
+            > Alpha:       0.00018518594643052302
+   COMPLETED ANALYZING [HLIEX] FACTOR STATISTICS!
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+ * ANALYZING [MADVX] BENCHMARK STATISTICS...
+         - marketExcess ~ benchmark OLS Results -- 
+             > Alpha:                           -0.000790479875710796
+             > Weights:                         [0.98739489 0.01260511 0.        ]
+             > Active  Benchmark Expense Ratio: 0.0005835674157303371
+               Passive Benchmark Expense Ratio: 3.152421171369824e-05
+               Difference Active VS. Passive:   0.0005520432040166389
+   COMPLETED ANALYZING [MADVX] BENCHMARK STATISTICS!
+
+
+
+
+ * ANALYZING [LAFYX] BENCHMARK STATISTICS...
+         - marketExcess ~ benchmark OLS Results -- 
+             > Alpha:                           -0.001484439996242611
+             > Weights:                         [0.70674659 0.12187696 0.17137645]
+             > Active  Benchmark Expense Ratio: 0.00039316479400749066
+               Passive Benchmark Expense Ratio: 3.5232027695203347e-05
+               Difference Active VS. Passive:   0.0003579327663122873
+   COMPLETED ANALYZING [LAFYX] BENCHMARK STATISTICS!
+
+
+
+
+ * ANALYZING [AVLIX] BENCHMARK STATISTICS...
+         - marketExcess ~ benchmark OLS Results -- 
+             > Alpha:                           -0.0009329295269189886
+             > Weights:                         [0.89035249 0.10964751 0.        ]
+             > Active  Benchmark Expense Ratio: 0.000659316479400749
+               Passive Benchmark Expense Ratio: 3.2806298158683924e-05
+               Difference Active VS. Passive:   0.000626510181242065
+   COMPLETED ANALYZING [AVLIX] BENCHMARK STATISTICS!
+
+
+
+
+ * ANALYZING [GSIIX] BENCHMARK STATISTICS...
+         - marketExcess ~ benchmark OLS Results -- 
+             > Alpha:                           -0.001605509439633581
+             > Weights:                         [0.85646628 0.00195611 0.14157762]
+             > Active  Benchmark Expense Ratio: 0.000618071161048689
+               Passive Benchmark Expense Ratio: 3.325398955361357e-05
+               Difference Active VS. Passive:   0.0005848171714950755
+   COMPLETED ANALYZING [GSIIX] BENCHMARK STATISTICS!
+
+
+
+
+ * ANALYZING [HLIEX] BENCHMARK STATISTICS...
+         - marketExcess ~ benchmark OLS Results -- 
+             > Alpha:                           -0.0004667230168685196
+             > Weights:                         [0.95230221 0.02280226 0.02489553]
+             > Active  Benchmark Expense Ratio: 0.0006191011235955056
+               Passive Benchmark Expense Ratio: 3.198784249597752e-05
+               Difference Active VS. Passive:   0.0005871132810995281
+   COMPLETED ANALYZING [HLIEX] BENCHMARK STATISTICS!
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+ * ANALYZING [MADVX] PERSISTANCE...
+         - CAPM
+             > Alpha-Before:                        -0.00027620346971799615
+             > Alpha-After:                         -0.001540244440503771
+         - FAMA
+             > Alpha-Before:                        -0.00019529581728633147
+             > Alpha-After:                         -0.0011677158008166883
+         - CARHART
+             > Alpha-Before:                        -0.00042053169605905396
+             > Alpha-After:                         -0.0009502676124049537
+   COMPLETED ANALYZING [MADVX] PERSISTANCE!
+
+
+
+
+ * ANALYZING [LAFYX] PERSISTANCE...
+         - CAPM
+             > Alpha-Before:                        -0.002707535078896213
+             > Alpha-After:                         -0.0026909509617391867
+         - FAMA
+             > Alpha-Before:                        -0.002474040443151703
+             > Alpha-After:                         -0.002619978563516526
+         - CARHART
+             > Alpha-Before:                        -0.002313936302072733
+             > Alpha-After:                         -0.0027149163878123065
+   COMPLETED ANALYZING [LAFYX] PERSISTANCE!
+
+
+
+
+ * ANALYZING [AVLIX] PERSISTANCE...
+         - CAPM
+             > Alpha-Before:                        -0.0009341204246932858
+             > Alpha-After:                         -0.0026567385555511186
+         - FAMA
+             > Alpha-Before:                        -0.00047331857644485845
+             > Alpha-After:                         -0.0015569260706435992
+         - CARHART
+             > Alpha-Before:                        -8.314134212237383e-05
+             > Alpha-After:                         -0.0012244206746171563
+   COMPLETED ANALYZING [AVLIX] PERSISTANCE!
+
+
+
+
+ * ANALYZING [GSIIX] PERSISTANCE...
+         - CAPM
+             > Alpha-Before:                        -0.0027119742229961023
+             > Alpha-After:                         -0.0014401282831002394
+         - FAMA
+             > Alpha-Before:                        -0.0024154353494970234
+             > Alpha-After:                         -0.0016619267164104492
+         - CARHART
+             > Alpha-Before:                        -0.0022884498560902296
+             > Alpha-After:                         -0.0016803572406838346
+   COMPLETED ANALYZING [GSIIX] PERSISTANCE!
+
+
+
+
+ * ANALYZING [HLIEX] PERSISTANCE...
+         - CAPM
+             > Alpha-Before:                        0.0006799397921577181
+             > Alpha-After:                         -0.0018042166666590758
+         - FAMA
+             > Alpha-Before:                        0.0007747969381369655
+             > Alpha-After:                         -0.0017274446228810324
+         - CARHART
+             > Alpha-Before:                        0.0004425806136292542
+             > Alpha-After:                         -0.0017149316880533524
+   COMPLETED ANALYZING [HLIEX] PERSISTANCE!
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+ * ANALYZING [MADVX] FLOW...
+shape: (14, 2)
+┌────────────┬───────────┐
+│ Date       ┆ Flow      │
+│ ---        ┆ [MADVX]   │
+│ date       ┆ ---       │
+│            ┆ f64       │
+╞════════════╪═══════════╡
+│ 2012-07-01 ┆ 4.3446e9  │
+│ 2013-07-01 ┆ 1.4858e9  │
+│ 2014-07-01 ┆ -1.6886e9 │
+│ 2015-07-01 ┆ -2.4275e9 │
+│ 2016-07-01 ┆ -2.4049e9 │
+│ 2017-07-01 ┆ -1.2321e9 │
+│ 2018-07-01 ┆ -2.5284e9 │
+│ 2019-07-01 ┆ -1.3165e9 │
+│ 2020-04-01 ┆ -6.5938e8 │
+│ 2021-04-01 ┆ -4.1455e8 │
+│ 2022-04-01 ┆ -5.0146e8 │
+│ 2023-04-01 ┆ -9.5044e8 │
+│ 2024-04-01 ┆ -8.9622e8 │
+│ 2025-04-01 ┆ -8.8259e8 │
+└────────────┴───────────┘
+
+   COMPLETED ANALYZING [MADVX] FLOW!
+
+
+
+
+ * ANALYZING [LAFYX] FLOW...
+shape: (14, 2)
+┌────────────┬───────────────┐
+│ Date       ┆ Flow          │
+│ ---        ┆ [LAFYX]       │
+│ date       ┆ ---           │
+│            ┆ f64           │
+╞════════════╪═══════════════╡
+│ 2012-10-01 ┆ -9.2627e7     │
+│ 2013-10-01 ┆ -2.0851e8     │
+│ 2014-10-01 ┆ -5.0972e6     │
+│ 2015-10-01 ┆ -1.4147e8     │
+│ 2016-10-01 ┆ -1.4238e6     │
+│ 2017-10-01 ┆ -9.5754e7     │
+│ 2018-10-01 ┆ 5.0980e7      │
+│ 2019-10-01 ┆ -1.3213e7     │
+│ 2020-10-01 ┆ 3.2987e6      │
+│ 2021-10-01 ┆ 748650.275156 │
+│ 2022-10-01 ┆ 6.9711e7      │
+│ 2023-10-01 ┆ 4.3949e7      │
+│ 2024-10-01 ┆ 2.3384e8      │
+│ 2025-10-01 ┆ -1.8924e7     │
+└────────────┴───────────────┘
+
+   COMPLETED ANALYZING [LAFYX] FLOW!
+
+
+
+
+ * ANALYZING [AVLIX] FLOW...
+shape: (14, 2)
+┌────────────┬───────────┐
+│ Date       ┆ Flow      │
+│ ---        ┆ [AVLIX]   │
+│ date       ┆ ---       │
+│            ┆ f64       │
+╞════════════╪═══════════╡
+│ 2012-03-01 ┆ -1.1435e8 │
+│ 2013-03-01 ┆ 2.6396e7  │
+│ 2014-03-01 ┆ 5.4062e8  │
+│ 2015-03-01 ┆ 3.9697e8  │
+│ 2016-03-01 ┆ -6.5341e8 │
+│ 2017-03-01 ┆ -1.2993e8 │
+│ 2018-03-01 ┆ 1.1090e8  │
+│ 2019-03-01 ┆ -3.5473e8 │
+│ 2020-03-01 ┆ -9.4285e7 │
+│ 2021-03-01 ┆ 2.8054e8  │
+│ 2022-03-01 ┆ -7.3059e7 │
+│ 2023-03-01 ┆ -4.2804e7 │
+│ 2024-03-01 ┆ 1.3782e7  │
+│ 2025-03-01 ┆ -1.0616e7 │
+└────────────┴───────────┘
+
+   COMPLETED ANALYZING [AVLIX] FLOW!
+
+
+
+
+ * ANALYZING [GSIIX] FLOW...
+shape: (14, 2)
+┌────────────┬────────────────┐
+│ Date       ┆ Flow           │
+│ ---        ┆ [GSIIX]        │
+│ date       ┆ ---            │
+│            ┆ f64            │
+╞════════════╪════════════════╡
+│ 2012-08-01 ┆ -3.3224e7      │
+│ 2013-08-01 ┆ -3.2473e6      │
+│ 2014-08-01 ┆ 5.8710e6       │
+│ 2015-08-01 ┆ 827085.007815  │
+│ 2016-08-01 ┆ -554241.619215 │
+│ 2017-08-01 ┆ 2.9208e6       │
+│ 2018-08-01 ┆ -1.6596e7      │
+│ 2019-08-01 ┆ -5.4070e6      │
+│ 2020-08-01 ┆ 2.2267e6       │
+│ 2021-08-01 ┆ 5.0640e6       │
+│ 2022-08-01 ┆ -599739.175649 │
+│ 2023-08-01 ┆ -6.6994e6      │
+│ 2024-08-01 ┆ -1.0310e7      │
+│ 2025-08-01 ┆ -1.1604e6      │
+└────────────┴────────────────┘
+
+   COMPLETED ANALYZING [GSIIX] FLOW!
+
+
+
+
+ * ANALYZING [HLIEX] FLOW...
+shape: (14, 2)
+┌────────────┬───────────┐
+│ Date       ┆ Flow      │
+│ ---        ┆ [HLIEX]   │
+│ date       ┆ ---       │
+│            ┆ f64       │
+╞════════════╪═══════════╡
+│ 2012-06-01 ┆ 1.0937e9  │
+│ 2013-06-01 ┆ 7.3841e8  │
+│ 2014-06-01 ┆ 6.1303e8  │
+│ 2015-06-01 ┆ 1.0088e9  │
+│ 2016-06-01 ┆ -1.6502e8 │
+│ 2017-06-01 ┆ 1.2032e9  │
+│ 2018-06-01 ┆ -8.0009e8 │
+│ 2019-06-01 ┆ 2.1140e9  │
+│ 2020-06-01 ┆ 2.3745e9  │
+│ 2021-06-01 ┆ 2.9521e9  │
+│ 2022-06-01 ┆ -4.9352e6 │
+│ 2023-06-01 ┆ 2.1742e8  │
+│ 2024-06-01 ┆ -3.2939e9 │
+│ 2025-06-01 ┆ -1.9470e9 │
+└────────────┴───────────┘
+
+   COMPLETED ANALYZING [HLIEX] FLOW!
+
+
+
+
+BASE: COMPLETE DATA ANALYSIS!
+
+SENSITIVITY_A: BEGIN DATA ANALYSIS...
+ * ANALYZING [MADVX] FACTOR STATISTICS...
+         - marketExcess ~ capm         OLS Results -- 
+            > Alpha:       -0.0007459424287350677
+            > T-Statistic: -0.6083980816881758
+            > Track Error: 0.01576028439314854
+            > Info Ratio:  -0.0473305182906059
+            > R-Squared:   0.8015051674879242
+         - grossMarketExcess ~ capm    OLS Results -- 
+            > Alpha:       -0.00016257164602792045
+
+         - marketExcess ~ fama         OLS Results -- 
+            > Alpha:       -0.0008078374923511936
+            > T-Statistic: -0.9287006993317001
+            > Track Error: 0.01098519305294277
+            > Info Ratio:  -0.07353876153635606
+            > R-Squared:   0.9035645986717953
+         - grossMarketExcess ~ fama    OLS Results -- 
+            > Alpha:       -0.00022429995333022942
+
+         - marketExcess ~ carhart      OLS Results -- 
+            > Alpha:       -0.0007145015512019925
+            > T-Statistic: -0.8108180966347422
+            > Track Error: 0.010969572530011826
+            > Info Ratio:  -0.06513485819499132
+            > R-Squared:   0.9038386585612099
+         - grossMarketExcess ~ carhart OLS Results -- 
+            > Alpha:       -0.00013097836104393164
+   COMPLETED ANALYZING [MADVX] FACTOR STATISTICS!
+
+
+
+
+ * ANALYZING [LAFYX] FACTOR STATISTICS...
+         - marketExcess ~ capm         OLS Results -- 
+            > Alpha:       -0.0017905726347616326
+            > T-Statistic: -1.8198164212536772
+            > Track Error: 0.012647682043664416
+            > Info Ratio:  -0.14157318539317498
+            > R-Squared:   0.8873141581347785
+         - grossMarketExcess ~ capm    OLS Results -- 
+            > Alpha:       -0.0013971946363597594
+
+         - marketExcess ~ fama         OLS Results -- 
+            > Alpha:       -0.0018828545348584923
+            > T-Statistic: -2.6384599739775676
+            > Track Error: 0.009012094133677538
+            > Info Ratio:  -0.20892530714059038
+            > R-Squared:   0.9427864475813482
+         - grossMarketExcess ~ fama    OLS Results -- 
+            > Alpha:       -0.001489299971498925
+
+         - marketExcess ~ carhart      OLS Results -- 
+            > Alpha:       -0.0018600883398678966
+            > T-Statistic: -2.569640514051376
+            > Track Error: 0.00901096204872724
+            > Info Ratio:  -0.20642505537248668
+            > R-Squared:   0.9428008208296733
+         - grossMarketExcess ~ carhart OLS Results -- 
+            > Alpha:       -0.001466566580403349
+   COMPLETED ANALYZING [LAFYX] FACTOR STATISTICS!
+
+
+
+
+ * ANALYZING [AVLIX] FACTOR STATISTICS...
+         - marketExcess ~ capm         OLS Results -- 
+            > Alpha:       -0.0012284025754612487
+            > T-Statistic: -0.8900480479245336
+            > Track Error: 0.01774082623287693
+            > Info Ratio:  -0.06924156515240527
+            > R-Squared:   0.7765782760695523
+         - grossMarketExcess ~ capm    OLS Results -- 
+            > Alpha:       -0.0005689247748073381
+
+         - marketExcess ~ fama         OLS Results -- 
+            > Alpha:       -0.0008211764400624481
+            > T-Statistic: -0.993486795775642
+            > Track Error: 0.010438397771874088
+            > Info Ratio:  -0.07866882044628348
+            > R-Squared:   0.9226526571158826
+         - grossMarketExcess ~ fama    OLS Results -- 
+            > Alpha:       -0.00016172144071102516
+
+         - marketExcess ~ carhart      OLS Results -- 
+            > Alpha:       -0.00028772767164771546
+            > T-Statistic: -0.36225638612348693
+            > Track Error: 0.009887250608742362
+            > Info Ratio:  -0.029100877790364195
+            > R-Squared:   0.9306049011500137
+         - grossMarketExcess ~ carhart OLS Results -- 
+            > Alpha:       0.0003716588324946503
+   COMPLETED ANALYZING [AVLIX] FACTOR STATISTICS!
+
+
+
+
+ * ANALYZING [GSIIX] FACTOR STATISTICS...
+         - marketExcess ~ capm         OLS Results -- 
+            > Alpha:       -0.0014554657644191683
+            > T-Statistic: -1.3653367837827222
+            > Track Error: 0.013702782974865465
+            > Info Ratio:  -0.10621680041849005
+            > R-Squared:   0.8527393584800742
+         - grossMarketExcess ~ capm    OLS Results -- 
+            > Alpha:       -0.0008374390527917165
+
+         - marketExcess ~ fama         OLS Results -- 
+            > Alpha:       -0.0016280535171444713
+            > T-Statistic: -2.0270079425747562
+            > Track Error: 0.010143146247765748
+            > Info Ratio:  -0.16050774359120437
+            > R-Squared:   0.9193109682664632
+         - grossMarketExcess ~ fama    OLS Results -- 
+            > Alpha:       -0.001009906715614557
+
+         - marketExcess ~ carhart      OLS Results -- 
+            > Alpha:       -0.0015998662175002304
+            > T-Statistic: -1.9637534761810325
+            > Track Error: 0.010141604320728187
+            > Info Ratio:  -0.1577527743051759
+            > R-Squared:   0.9193354985532064
+         - grossMarketExcess ~ carhart OLS Results -- 
+            > Alpha:       -0.0009816886702393498
+   COMPLETED ANALYZING [GSIIX] FACTOR STATISTICS!
+
+
+
+
+ * ANALYZING [HLIEX] FACTOR STATISTICS...
+         - marketExcess ~ capm         OLS Results -- 
+            > Alpha:       -0.00012373677485006307
+            > T-Statistic: -0.1087798551651231
+            > Track Error: 0.014621667094881618
+            > Info Ratio:  -0.00846256271922493
+            > R-Squared:   0.8207753851154275
+         - grossMarketExcess ~ capm    OLS Results -- 
+            > Alpha:       0.0004956463204547721
+
+         - marketExcess ~ fama         OLS Results -- 
+            > Alpha:       -0.00022434223833693075
+            > T-Statistic: -0.25421739515652425
+            > Track Error: 0.011144619495178138
+            > Info Ratio:  -0.020130094027346137
+            > R-Squared:   0.8958799512369172
+         - grossMarketExcess ~ fama    OLS Results -- 
+            > Alpha:       0.0003952614652428688
+
+         - marketExcess ~ carhart      OLS Results -- 
+            > Alpha:       -0.0003374861346248389
+            > T-Statistic: -0.3777317734539124
+            > Track Error: 0.01112198687788106
+            > Info Ratio:  -0.030344050782510557
+            > R-Squared:   0.8963024181331725
+         - grossMarketExcess ~ carhart OLS Results -- 
+            > Alpha:       0.0002822844755480881
+   COMPLETED ANALYZING [HLIEX] FACTOR STATISTICS!
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+ * ANALYZING [MADVX] BENCHMARK STATISTICS...
+         - marketExcess ~ benchmark OLS Results -- 
+             > Alpha:                           -0.0008521583366902772
+             > Weights:                         [9.82842233e-01 1.71577666e-02 2.47974155e-18]
+             > Active  Benchmark Expense Ratio: 0.0005835674157303371
+               Passive Benchmark Expense Ratio: 3.158435963160235e-05
+               Difference Active VS. Passive:   0.0005519830560987347
+   COMPLETED ANALYZING [MADVX] BENCHMARK STATISTICS!
+
+
+
+
+ * ANALYZING [LAFYX] BENCHMARK STATISTICS...
+         - marketExcess ~ benchmark OLS Results -- 
+             > Alpha:                           -0.0013164696181511117
+             > Weights:                         [0.72129091 0.08913655 0.18957254]
+             > Active  Benchmark Expense Ratio: 0.00039316479400749066
+               Passive Benchmark Expense Ratio: 3.503987382052165e-05
+               Difference Active VS. Passive:   0.000358124920186969
+   COMPLETED ANALYZING [LAFYX] BENCHMARK STATISTICS!
+
+
+
+
+ * ANALYZING [AVLIX] BENCHMARK STATISTICS...
+         - marketExcess ~ benchmark OLS Results -- 
+             > Alpha:                           -0.0009795933233196403
+             > Weights:                         [9.09666012e-01 9.03339880e-02 9.06388292e-17]
+             > Active  Benchmark Expense Ratio: 0.000659316479400749
+               Passive Benchmark Expense Ratio: 3.255113536596623e-05
+               Difference Active VS. Passive:   0.0006267653440347827
+   COMPLETED ANALYZING [AVLIX] BENCHMARK STATISTICS!
+
+
+
+
+ * ANALYZING [GSIIX] BENCHMARK STATISTICS...
+         - marketExcess ~ benchmark OLS Results -- 
+             > Alpha:                           -0.0014963016149167126
+             > Weights:                         [0.85907655 0.01251485 0.1284086 ]
+             > Active  Benchmark Expense Ratio: 0.0006180711610486891
+               Passive Benchmark Expense Ratio: 3.3219503603947594e-05
+               Difference Active VS. Passive:   0.0005848516574447415
+   COMPLETED ANALYZING [GSIIX] BENCHMARK STATISTICS!
+
+
+
+
+ * ANALYZING [HLIEX] BENCHMARK STATISTICS...
+         - marketExcess ~ benchmark OLS Results -- 
+             > Alpha:                           -0.0003562964898263033
+             > Weights:                         [0.97313092 0.01508013 0.01178896]
+             > Active  Benchmark Expense Ratio: 0.0006192883895131086
+               Passive Benchmark Expense Ratio: 3.171266177850446e-05
+               Difference Active VS. Passive:   0.0005875757277346041
+   COMPLETED ANALYZING [HLIEX] BENCHMARK STATISTICS!
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+ * ANALYZING [MADVX] PERSISTANCE...
+         - CAPM
+             > Alpha-Before:                        -0.0002739827179313328
+             > Alpha-After:                         -0.0015726811989286024
+         - FAMA
+             > Alpha-Before:                        -0.00016296430798104952
+             > Alpha-After:                         -0.0018468669915945345
+         - CARHART
+             > Alpha-Before:                        -0.0003594841368841366
+             > Alpha-After:                         -0.0015671506171346713
+   COMPLETED ANALYZING [MADVX] PERSISTANCE!
+
+
+
+
+ * ANALYZING [LAFYX] PERSISTANCE...
+         - CAPM
+             > Alpha-Before:                        -0.002383894292170273
+             > Alpha-After:                         -0.0018227557793683838
+         - FAMA
+             > Alpha-Before:                        -0.002141080405160082
+             > Alpha-After:                         -0.0022349319247605315
+         - CARHART
+             > Alpha-Before:                        -0.0019082931525982335
+             > Alpha-After:                         -0.0022646262563996208
+   COMPLETED ANALYZING [LAFYX] PERSISTANCE!
+
+
+
+
+ * ANALYZING [AVLIX] PERSISTANCE...
+         - CAPM
+             > Alpha-Before:                        -0.0009399964860152716
+             > Alpha-After:                         -0.002016886728052947
+         - FAMA
+             > Alpha-Before:                        -0.000430742735601973
+             > Alpha-After:                         -0.0016822298937281823
+         - CARHART
+             > Alpha-Before:                        -4.995044752048697e-05
+             > Alpha-After:                         -0.001114627928987914
+   COMPLETED ANALYZING [AVLIX] PERSISTANCE!
+
+
+
+
+ * ANALYZING [GSIIX] PERSISTANCE...
+         - CAPM
+             > Alpha-Before:                        -0.0026237261368069
+             > Alpha-After:                         -0.0012298379023520099
+         - FAMA
+             > Alpha-Before:                        -0.0022937987408390395
+             > Alpha-After:                         -0.0019285946178754193
+         - CARHART
+             > Alpha-Before:                        -0.0021641109395057543
+             > Alpha-After:                         -0.0018707546244505027
+   COMPLETED ANALYZING [GSIIX] PERSISTANCE!
+
+
+
+
+ * ANALYZING [HLIEX] PERSISTANCE...
+         - CAPM
+             > Alpha-Before:                        0.0006710752933567251
+             > Alpha-After:                         -0.0013083045218839108
+         - FAMA
+             > Alpha-Before:                        0.0007803007972698447
+             > Alpha-After:                         -0.0018434575602617963
+         - CARHART
+             > Alpha-Before:                        0.0004565791685220832
+             > Alpha-After:                         -0.0017198611104377473
+   COMPLETED ANALYZING [HLIEX] PERSISTANCE!
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+ * ANALYZING [MADVX] FLOW...
+shape: (14, 2)
+┌────────────┬───────────┐
+│ Date       ┆ Flow      │
+│ ---        ┆ [MADVX]   │
+│ date       ┆ ---       │
+│            ┆ f64       │
+╞════════════╪═══════════╡
+│ 2012-07-01 ┆ 4.4342e9  │
+│ 2013-07-01 ┆ 1.4858e9  │
+│ 2014-07-01 ┆ -1.6886e9 │
+│ 2015-07-01 ┆ -2.4275e9 │
+│ 2016-07-01 ┆ -2.4049e9 │
+│ 2017-07-01 ┆ -1.2321e9 │
+│ 2018-07-01 ┆ -2.5284e9 │
+│ 2019-07-01 ┆ -1.3283e9 │
+│ 2020-04-01 ┆ -1.1679e9 │
+│ 2021-04-01 ┆ 3.9806e8  │
+│ 2022-04-01 ┆ -5.0146e8 │
+│ 2023-04-01 ┆ -8.1677e8 │
+│ 2024-04-01 ┆ -9.0306e8 │
+│ 2025-04-01 ┆ -8.8569e8 │
+└────────────┴───────────┘
+
+   COMPLETED ANALYZING [MADVX] FLOW!
+
+
+
+
+ * ANALYZING [LAFYX] FLOW...
+shape: (14, 2)
+┌────────────┬───────────┐
+│ Date       ┆ Flow      │
+│ ---        ┆ [LAFYX]   │
+│ date       ┆ ---       │
+│            ┆ f64       │
+╞════════════╪═══════════╡
+│ 2012-10-01 ┆ -9.2627e7 │
+│ 2013-10-01 ┆ -2.0851e8 │
+│ 2014-10-01 ┆ -5.0972e6 │
+│ 2015-10-01 ┆ -1.4147e8 │
+│ 2016-10-01 ┆ -1.4238e6 │
+│ 2017-10-01 ┆ -9.5754e7 │
+│ 2018-10-01 ┆ 5.0980e7  │
+│ 2019-10-01 ┆ -1.4583e7 │
+│ 2020-10-01 ┆ -7.4350e6 │
+│ 2021-10-01 ┆ 5.9659e6  │
+│ 2022-10-01 ┆ 7.1386e7  │
+│ 2023-10-01 ┆ 4.3908e7  │
+│ 2024-10-01 ┆ 2.3362e8  │
+│ 2025-10-01 ┆ -1.8924e7 │
+└────────────┴───────────┘
+
+   COMPLETED ANALYZING [LAFYX] FLOW!
+
+
+
+
+ * ANALYZING [AVLIX] FLOW...
+shape: (14, 2)
+┌────────────┬───────────┐
+│ Date       ┆ Flow      │
+│ ---        ┆ [AVLIX]   │
+│ date       ┆ ---       │
+│            ┆ f64       │
+╞════════════╪═══════════╡
+│ 2012-03-01 ┆ -1.1152e8 │
+│ 2013-03-01 ┆ 2.6396e7  │
+│ 2014-03-01 ┆ 5.4062e8  │
+│ 2015-03-01 ┆ 3.9697e8  │
+│ 2016-03-01 ┆ -6.5341e8 │
+│ 2017-03-01 ┆ -1.2993e8 │
+│ 2018-03-01 ┆ 1.1090e8  │
+│ 2019-03-01 ┆ -3.6062e8 │
+│ 2020-03-01 ┆ -1.2880e8 │
+│ 2021-03-01 ┆ 3.0748e8  │
+│ 2022-03-01 ┆ -7.3059e7 │
+│ 2023-03-01 ┆ -2.9944e7 │
+│ 2024-03-01 ┆ 1.3579e7  │
+│ 2025-03-01 ┆ -1.0880e7 │
+└────────────┴───────────┘
+
+   COMPLETED ANALYZING [AVLIX] FLOW!
+
+
+
+
+ * ANALYZING [GSIIX] FLOW...
+shape: (14, 2)
+┌────────────┬────────────────┐
+│ Date       ┆ Flow           │
+│ ---        ┆ [GSIIX]        │
+│ date       ┆ ---            │
+│            ┆ f64            │
+╞════════════╪════════════════╡
+│ 2012-08-01 ┆ -3.2254e7      │
+│ 2013-08-01 ┆ -3.2473e6      │
+│ 2014-08-01 ┆ 5.8710e6       │
+│ 2015-08-01 ┆ 827085.007815  │
+│ 2016-08-01 ┆ -554241.619215 │
+│ 2017-08-01 ┆ 2.9208e6       │
+│ 2018-08-01 ┆ -1.6596e7      │
+│ 2019-08-01 ┆ -5.5783e6      │
+│ 2020-08-01 ┆ 884937.552072  │
+│ 2021-08-01 ┆ 6.1266e6       │
+│ 2022-08-01 ┆ -599739.175649 │
+│ 2023-08-01 ┆ -5.9050e6      │
+│ 2024-08-01 ┆ -1.0338e7      │
+│ 2025-08-01 ┆ -1.1604e6      │
+└────────────┴────────────────┘
+
+   COMPLETED ANALYZING [GSIIX] FLOW!
+
+
+
+
+ * ANALYZING [HLIEX] FLOW...
+shape: (14, 2)
+┌────────────┬───────────┐
+│ Date       ┆ Flow      │
+│ ---        ┆ [HLIEX]   │
+│ date       ┆ ---       │
+│            ┆ f64       │
+╞════════════╪═══════════╡
+│ 2012-06-01 ┆ 1.0988e9  │
+│ 2013-06-01 ┆ 7.3841e8  │
+│ 2014-06-01 ┆ 6.1303e8  │
+│ 2015-06-01 ┆ 1.0088e9  │
+│ 2016-06-01 ┆ -1.6502e8 │
+│ 2017-06-01 ┆ 1.2032e9  │
+│ 2018-06-01 ┆ -8.0009e8 │
+│ 2019-06-01 ┆ 2.0536e9  │
+│ 2020-06-01 ┆ 1.6776e9  │
+│ 2021-06-01 ┆ 3.6188e9  │
+│ 2022-06-01 ┆ -4.9352e6 │
+│ 2023-06-01 ┆ 7.4012e8  │
+│ 2024-06-01 ┆ -3.3058e9 │
+│ 2025-06-01 ┆ -1.9587e9 │
+└────────────┴───────────┘
+
+   COMPLETED ANALYZING [HLIEX] FLOW!
+
+
+
+
+SENSITIVITY_A: COMPLETE DATA ANALYSIS!
+
+SENSITIVITY_B: BEGIN DATA ANALYSIS...
+ * ANALYZING [MADVX] FACTOR STATISTICS...
+         - marketExcess ~ capm         OLS Results -- 
+            > Alpha:       -0.0005984780688031242
+            > T-Statistic: -0.48270042712204236
+            > Track Error: 0.015954131350027927
+            > Info Ratio:  -0.03751241955282489
+            > R-Squared:   0.8096360935713385
+         - grossMarketExcess ~ capm    OLS Results -- 
+            > Alpha:       -1.5104796311175592e-05
+
+         - marketExcess ~ fama         OLS Results -- 
+            > Alpha:       -0.0005857912541258623
+            > T-Statistic: -0.698184881152184
+            > Track Error: 0.010605973900497405
+            > Info Ratio:  -0.0552321983461028
+            > R-Squared:   0.9158722275209294
+         - grossMarketExcess ~ fama    OLS Results -- 
+            > Alpha:       -2.2530769291117695e-06
+
+         - marketExcess ~ carhart      OLS Results -- 
+            > Alpha:       -0.000546254815900405
+            > T-Statistic: -0.6432698938818371
+            > Track Error: 0.01060244254780457
+            > Info Ratio:  -0.05152160112515933
+            > R-Squared:   0.915928240364288
+         - grossMarketExcess ~ carhart OLS Results -- 
+            > Alpha:       3.724882769692835e-05
+   COMPLETED ANALYZING [MADVX] FACTOR STATISTICS!
+
+
+
+
+ * ANALYZING [LAFYX] FACTOR STATISTICS...
+         - marketExcess ~ capm         OLS Results -- 
+            > Alpha:       -0.0018967513581684625
+            > T-Statistic: -1.83939811968999
+            > Track Error: 0.013268971813915459
+            > Info Ratio:  -0.14294637028162938
+            > R-Squared:   0.889897648655768
+         - grossMarketExcess ~ capm    OLS Results -- 
+            > Alpha:       -0.0015033906695730882
+
+         - marketExcess ~ fama         OLS Results -- 
+            > Alpha:       -0.0018686783609740075
+            > T-Statistic: -2.5683013403507373
+            > Track Error: 0.00919743418885993
+            > Info Ratio:  -0.2031738768228838
+            > R-Squared:   0.9471000296414878
+         - grossMarketExcess ~ fama    OLS Results -- 
+            > Alpha:       -0.001475143595496182
+
+         - marketExcess ~ carhart      OLS Results -- 
+            > Alpha:       -0.0019604875893551622
+            > T-Statistic: -2.6677212830628836
+            > Track Error: 0.009175453084004984
+            > Info Ratio:  -0.21366657007627912
+            > R-Squared:   0.9473525805755619
+         - grossMarketExcess ~ carhart OLS Results -- 
+            > Alpha:       -0.0015670217113751802
+   COMPLETED ANALYZING [LAFYX] FACTOR STATISTICS!
+
+
+
+
+ * ANALYZING [AVLIX] FACTOR STATISTICS...
+         - marketExcess ~ capm         OLS Results -- 
+            > Alpha:       -0.0012815318305254536
+            > T-Statistic: -0.8871548891349412
+            > Track Error: 0.018587995272261473
+            > Info Ratio:  -0.06894405834274447
+            > R-Squared:   0.7856930575463088
+         - grossMarketExcess ~ capm    OLS Results -- 
+            > Alpha:       -0.000622086404661142
+
+         - marketExcess ~ fama         OLS Results -- 
+            > Alpha:       -0.0007595477160424434
+            > T-Statistic: -0.9314003213978197
+            > Track Error: 0.010308531195800528
+            > Info Ratio:  -0.07368146844740274
+            > R-Squared:   0.9340879661982848
+         - grossMarketExcess ~ fama    OLS Results -- 
+            > Alpha:       -0.00010012950255617695
+
+         - marketExcess ~ carhart      OLS Results -- 
+            > Alpha:       -0.00034952719054920486
+            > T-Statistic: -0.44035727844817774
+            > Track Error: 0.009910137091966337
+            > Info Ratio:  -0.03526966249867012
+            > R-Squared:   0.9390841290164852
+         - grossMarketExcess ~ carhart OLS Results -- 
+            > Alpha:       0.00030988455727174786
+   COMPLETED ANALYZING [AVLIX] FACTOR STATISTICS!
+
+
+
+
+ * ANALYZING [GSIIX] FACTOR STATISTICS...
+         - marketExcess ~ capm         OLS Results -- 
+            > Alpha:       -0.0012680022726406742
+            > T-Statistic: -1.1496963194540062
+            > Track Error: 0.014191865837872318
+            > Info Ratio:  -0.08934711525082853
+            > R-Squared:   0.8544797957911556
+         - grossMarketExcess ~ capm    OLS Results -- 
+            > Alpha:       -0.000649999936507728
+
+         - marketExcess ~ fama         OLS Results -- 
+            > Alpha:       -0.0013558426549362464
+            > T-Statistic: -1.6700141565271511
+            > Track Error: 0.010262832738945994
+            > Info Ratio:  -0.13211193141548686
+            > R-Squared:   0.9239010256365647
+         - grossMarketExcess ~ fama    OLS Results -- 
+            > Alpha:       -0.0007377288200593783
+
+         - marketExcess ~ carhart      OLS Results -- 
+            > Alpha:       -0.001437620210834316
+            > T-Statistic: -1.751630128125978
+            > Track Error: 0.010247210044436574
+            > Info Ratio:  -0.14029381700971674
+            > R-Squared:   0.9241325340658798
+         - grossMarketExcess ~ carhart OLS Results -- 
+            > Alpha:       -0.0008195003015510899
+   COMPLETED ANALYZING [GSIIX] FACTOR STATISTICS!
+
+
+
+
+ * ANALYZING [HLIEX] FACTOR STATISTICS...
+         - marketExcess ~ capm         OLS Results -- 
+            > Alpha:       8.518343355488244e-05
+            > T-Statistic: 0.07286777138431227
+            > Track Error: 0.015042577597071654
+            > Info Ratio:  0.0056628216145260335
+            > R-Squared:   0.8282083550404723
+         - grossMarketExcess ~ capm    OLS Results -- 
+            > Alpha:       0.0007044098446129852
+
+         - marketExcess ~ fama         OLS Results -- 
+            > Alpha:       7.97277465415951e-05
+            > T-Statistic: 0.09150217232404102
+            > Track Error: 0.011014282096497545
+            > Info Ratio:  0.0072385785876092545
+            > R-Squared:   0.9078978203725472
+         - grossMarketExcess ~ fama    OLS Results -- 
+            > Alpha:       0.0006991668714182078
+
+         - marketExcess ~ carhart      OLS Results -- 
+            > Alpha:       -0.00011748545201164742
+            > T-Statistic: -0.13421257563571518
+            > Track Error: 0.010929360630320352
+            > Info Ratio:  -0.01074952652634757
+            > R-Squared:   0.9093125834748698
+         - grossMarketExcess ~ carhart OLS Results -- 
+            > Alpha:       0.0005019862140638351
+   COMPLETED ANALYZING [HLIEX] FACTOR STATISTICS!
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+ * ANALYZING [MADVX] BENCHMARK STATISTICS...
+         - marketExcess ~ benchmark OLS Results -- 
+             > Alpha:                           -0.001046418367151778
+             > Weights:                         [0.98016981 0.         0.01983019]
+             > Active  Benchmark Expense Ratio: 0.0005835674157303371
+               Passive Benchmark Expense Ratio: 3.161966667062498e-05
+               Difference Active VS. Passive:   0.0005519477490597122
+   COMPLETED ANALYZING [MADVX] BENCHMARK STATISTICS!
+
+
+
+
+ * ANALYZING [LAFYX] BENCHMARK STATISTICS...
+         - marketExcess ~ benchmark OLS Results -- 
+             > Alpha:                           -0.0014112829470893306
+             > Weights:                         [0.70682667 0.09890667 0.19426666]
+             > Active  Benchmark Expense Ratio: 0.00039316479400749077
+               Passive Benchmark Expense Ratio: 3.523096974290602e-05
+               Difference Active VS. Passive:   0.00035793382426458476
+   COMPLETED ANALYZING [LAFYX] BENCHMARK STATISTICS!
+
+
+
+
+ * ANALYZING [AVLIX] BENCHMARK STATISTICS...
+         - marketExcess ~ benchmark OLS Results -- 
+             > Alpha:                           -0.0009960679925548107
+             > Weights:                         [9.18756541e-01 8.12434591e-02 1.50494660e-17]
+             > Active  Benchmark Expense Ratio: 0.000659316479400749
+               Passive Benchmark Expense Ratio: 3.243103483916555e-05
+               Difference Active VS. Passive:   0.0006268854445615834
+   COMPLETED ANALYZING [AVLIX] BENCHMARK STATISTICS!
+
+
+
+
+ * ANALYZING [GSIIX] BENCHMARK STATISTICS...
+         - marketExcess ~ benchmark OLS Results -- 
+             > Alpha:                           -0.0015681025413145514
+             > Weights:                         [0.84859143 0.         0.15140857]
+             > Active  Benchmark Expense Ratio: 0.000618071161048689
+               Passive Benchmark Expense Ratio: 3.335802899574018e-05
+               Difference Active VS. Passive:   0.0005847131320529488
+   COMPLETED ANALYZING [GSIIX] BENCHMARK STATISTICS!
+
+
+
+
+ * ANALYZING [HLIEX] BENCHMARK STATISTICS...
+         - marketExcess ~ benchmark OLS Results -- 
+             > Alpha:                           -0.00039038176586868393
+             > Weights:                         [9.46642226e-01 4.84092323e-04 5.28736815e-02]
+             > Active  Benchmark Expense Ratio: 0.0006191011235955056
+               Passive Benchmark Expense Ratio: 3.2062620026647665e-05
+               Difference Active VS. Passive:   0.000587038503568858
+   COMPLETED ANALYZING [HLIEX] BENCHMARK STATISTICS!
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+ * ANALYZING [MADVX] PERSISTANCE...
+         - CAPM
+             > Alpha-Before:                        -0.00027620346971799615
+             > Alpha-After:                         -0.0013074144859723487
+         - FAMA
+             > Alpha-Before:                        -0.00019529581728633147
+             > Alpha-After:                         -0.0013667213177076408
+         - CARHART
+             > Alpha-Before:                        -0.00040843419294018894
+             > Alpha-After:                         -0.0011917253465413516
+   COMPLETED ANALYZING [MADVX] PERSISTANCE!
+
+
+
+
+ * ANALYZING [LAFYX] PERSISTANCE...
+         - CAPM
+             > Alpha-Before:                        -0.002697072188258472
+             > Alpha-After:                         -0.0018599387819924393
+         - FAMA
+             > Alpha-Before:                        -0.002467767858978259
+             > Alpha-After:                         -0.002008194887997893
+         - CARHART
+             > Alpha-Before:                        -0.002298797853738654
+             > Alpha-After:                         -0.002100520992645569
+   COMPLETED ANALYZING [LAFYX] PERSISTANCE!
+
+
+
+
+ * ANALYZING [AVLIX] PERSISTANCE...
+         - CAPM
+             > Alpha-Before:                        -0.0009341204246932858
+             > Alpha-After:                         -0.0019674264226076854
+         - FAMA
+             > Alpha-Before:                        -0.00047331857644485845
+             > Alpha-After:                         -0.0013510860341703847
+         - CARHART
+             > Alpha-Before:                        -8.298622716298523e-05
+             > Alpha-After:                         -0.000991921107481086
+   COMPLETED ANALYZING [AVLIX] PERSISTANCE!
+
+
+
+
+ * ANALYZING [GSIIX] PERSISTANCE...
+         - CAPM
+             > Alpha-Before:                        -0.0027119742229961023
+             > Alpha-After:                         -0.0008964909244976484
+         - FAMA
+             > Alpha-Before:                        -0.0024154353494970234
+             > Alpha-After:                         -0.0013766649865895023
+         - CARHART
+             > Alpha-Before:                        -0.002295216913948005
+             > Alpha-After:                         -0.001417966894953765
+   COMPLETED ANALYZING [GSIIX] PERSISTANCE!
+
+
+
+
+ * ANALYZING [HLIEX] PERSISTANCE...
+         - CAPM
+             > Alpha-Before:                        0.0006799397921577181
+             > Alpha-After:                         -0.0009223962516815319
+         - FAMA
+             > Alpha-Before:                        0.0007747969381369655
+             > Alpha-After:                         -0.0011877909756759697
+         - CARHART
+             > Alpha-Before:                        0.0004439367923150914
+             > Alpha-After:                         -0.0011846383763520778
+   COMPLETED ANALYZING [HLIEX] PERSISTANCE!
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+ * ANALYZING [MADVX] FLOW...
+shape: (14, 2)
+┌────────────┬───────────┐
+│ Date       ┆ Flow      │
+│ ---        ┆ [MADVX]   │
+│ date       ┆ ---       │
+│            ┆ f64       │
+╞════════════╪═══════════╡
+│ 2012-07-01 ┆ 4.3446e9  │
+│ 2013-07-01 ┆ 1.4858e9  │
+│ 2014-07-01 ┆ -1.6886e9 │
+│ 2015-07-01 ┆ -2.4275e9 │
+│ 2016-07-01 ┆ -2.4049e9 │
+│ 2017-07-01 ┆ -1.2321e9 │
+│ 2018-07-01 ┆ -2.5284e9 │
+│ 2019-07-01 ┆ -1.3165e9 │
+│ 2020-04-01 ┆ -1.2496e9 │
+│ 2021-04-01 ┆ 1.6475e8  │
+│ 2022-04-01 ┆ -5.0146e8 │
+│ 2023-04-01 ┆ -9.5044e8 │
+│ 2024-04-01 ┆ -8.9622e8 │
+│ 2025-04-01 ┆ -8.8362e8 │
+└────────────┴───────────┘
+
+   COMPLETED ANALYZING [MADVX] FLOW!
+
+
+
+
+ * ANALYZING [LAFYX] FLOW...
+shape: (14, 2)
+┌────────────┬───────────────┐
+│ Date       ┆ Flow          │
+│ ---        ┆ [LAFYX]       │
+│ date       ┆ ---           │
+│            ┆ f64           │
+╞════════════╪═══════════════╡
+│ 2012-10-01 ┆ -9.2627e7     │
+│ 2013-10-01 ┆ -2.0851e8     │
+│ 2014-10-01 ┆ -5.0972e6     │
+│ 2015-10-01 ┆ -1.4147e8     │
+│ 2016-10-01 ┆ -1.4238e6     │
+│ 2017-10-01 ┆ -9.5754e7     │
+│ 2018-10-01 ┆ 5.0980e7      │
+│ 2019-10-01 ┆ -1.3213e7     │
+│ 2020-10-01 ┆ -6.2125e6     │
+│ 2021-10-01 ┆ 748650.275156 │
+│ 2022-10-01 ┆ 6.9711e7      │
+│ 2023-10-01 ┆ 4.3949e7      │
+│ 2024-10-01 ┆ 2.3381e8      │
+│ 2025-10-01 ┆ -1.8924e7     │
+└────────────┴───────────────┘
+
+   COMPLETED ANALYZING [LAFYX] FLOW!
+
+
+
+
+ * ANALYZING [AVLIX] FLOW...
+shape: (14, 2)
+┌────────────┬───────────┐
+│ Date       ┆ Flow      │
+│ ---        ┆ [AVLIX]   │
+│ date       ┆ ---       │
+│            ┆ f64       │
+╞════════════╪═══════════╡
+│ 2012-03-01 ┆ -1.1435e8 │
+│ 2013-03-01 ┆ 2.6396e7  │
+│ 2014-03-01 ┆ 5.4062e8  │
+│ 2015-03-01 ┆ 3.9697e8  │
+│ 2016-03-01 ┆ -6.5341e8 │
+│ 2017-03-01 ┆ -1.2993e8 │
+│ 2018-03-01 ┆ 1.1090e8  │
+│ 2019-03-01 ┆ -3.5473e8 │
+│ 2020-03-01 ┆ -1.1821e8 │
+│ 2021-03-01 ┆ 2.9023e8  │
+│ 2022-03-01 ┆ -7.3059e7 │
+│ 2023-03-01 ┆ -4.2804e7 │
+│ 2024-03-01 ┆ 1.3782e7  │
+│ 2025-03-01 ┆ -1.0668e7 │
+└────────────┴───────────┘
+
+   COMPLETED ANALYZING [AVLIX] FLOW!
+
+
+
+
+ * ANALYZING [GSIIX] FLOW...
+shape: (14, 2)
+┌────────────┬────────────────┐
+│ Date       ┆ Flow           │
+│ ---        ┆ [GSIIX]        │
+│ date       ┆ ---            │
+│            ┆ f64            │
+╞════════════╪════════════════╡
+│ 2012-08-01 ┆ -3.3224e7      │
+│ 2013-08-01 ┆ -3.2473e6      │
+│ 2014-08-01 ┆ 5.8710e6       │
+│ 2015-08-01 ┆ 827085.007815  │
+│ 2016-08-01 ┆ -554241.619215 │
+│ 2017-08-01 ┆ 2.9208e6       │
+│ 2018-08-01 ┆ -1.6596e7      │
+│ 2019-08-01 ┆ -5.4070e6      │
+│ 2020-08-01 ┆ 799467.268604  │
+│ 2021-08-01 ┆ 5.4391e6       │
+│ 2022-08-01 ┆ -599739.175649 │
+│ 2023-08-01 ┆ -6.6994e6      │
+│ 2024-08-01 ┆ -1.0313e7      │
+│ 2025-08-01 ┆ -1.1604e6      │
+└────────────┴────────────────┘
+
+   COMPLETED ANALYZING [GSIIX] FLOW!
+
+
+
+
+ * ANALYZING [HLIEX] FLOW...
+shape: (14, 2)
+┌────────────┬───────────┐
+│ Date       ┆ Flow      │
+│ ---        ┆ [HLIEX]   │
+│ date       ┆ ---       │
+│            ┆ f64       │
+╞════════════╪═══════════╡
+│ 2012-06-01 ┆ 1.0937e9  │
+│ 2013-06-01 ┆ 7.3841e8  │
+│ 2014-06-01 ┆ 6.1303e8  │
+│ 2015-06-01 ┆ 1.0088e9  │
+│ 2016-06-01 ┆ -1.6502e8 │
+│ 2017-06-01 ┆ 1.2032e9  │
+│ 2018-06-01 ┆ -8.0009e8 │
+│ 2019-06-01 ┆ 2.1140e9  │
+│ 2020-06-01 ┆ 1.5715e9  │
+│ 2021-06-01 ┆ 3.1969e9  │
+│ 2022-06-01 ┆ -4.9352e6 │
+│ 2023-06-01 ┆ 2.1742e8  │
+│ 2024-06-01 ┆ -3.2939e9 │
+│ 2025-06-01 ┆ -1.9487e9 │
+└────────────┴───────────┘
+
+   COMPLETED ANALYZING [HLIEX] FLOW!
+
+
+
+
+SENSITIVITY_B: COMPLETE DATA ANALYSIS!
+

@@ -1,0 +1,129 @@
+ticker,fiscal_year_end,expense_ratio_pct,turnover_pct,source,source_url
+AVLIX,2011-03-31,0.81,76.0,N-CSR FY2015 (Institutional Class),https://www.sec.gov/Archives/edgar/data/908186/000090818615000089/accp33115n-csr.htm
+AVLIX,2012-03-31,0.81,62.0,N-CSR FY2015 (Institutional Class),https://www.sec.gov/Archives/edgar/data/908186/000090818615000089/accp33115n-csr.htm
+AVLIX,2013-03-31,0.8,48.0,N-CSR FY2015 (Institutional Class),https://www.sec.gov/Archives/edgar/data/908186/000090818615000089/accp33115n-csr.htm
+AVLIX,2014-03-31,0.78,49.0,N-CSR FY2015 (Institutional Class),https://www.sec.gov/Archives/edgar/data/908186/000090818615000089/accp33115n-csr.htm
+AVLIX,2015-03-31,0.77,45.0,N-CSR FY2015 (Institutional Class),https://www.sec.gov/Archives/edgar/data/908186/000090818615000089/accp33115n-csr.htm
+AVLIX,2016-03-31,0.78,48.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/908186/000090818620000088/accp3312020n-csr.htm
+AVLIX,2017-03-31,0.78,46.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/908186/000090818620000088/accp3312020n-csr.htm
+AVLIX,2018-03-31,0.78,35.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/908186/000090818620000088/accp3312020n-csr.htm
+AVLIX,2019-03-31,0.78,48.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/908186/000090818620000088/accp3312020n-csr.htm
+AVLIX,2020-03-31,0.8,46.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/908186/000090818620000088/accp3312020n-csr.htm
+AVLIX,2021-03-31,0.8,53.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/908186/000090818625000051/ck0000908186-20250331.htm
+AVLIX,2022-03-31,0.81,41.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/908186/000090818625000051/ck0000908186-20250331.htm
+AVLIX,2023-03-31,0.82,42.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/908186/000090818625000051/ck0000908186-20250331.htm
+AVLIX,2024-03-31,0.81,35.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/908186/000090818625000051/ck0000908186-20250331.htm
+AVLIX,2025-03-31,0.77,44.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/908186/000090818625000051/ck0000908186-20250331.htm
+AVLIX,2026-03-31,0.76,55.0,N-CSR FY2026,https://www.sec.gov/Archives/edgar/data/908186/000090818626000014/ck0000908186-20260331.htm
+GSIIX,2011-08-31,0.79,60.0,N-CSR FY2015 (Growth and Income Fund),https://www.sec.gov/Archives/edgar/data/822977/000119312515368182/d46965dncsr.htm
+GSIIX,2012-08-31,0.79,115.0,N-CSR FY2015 (Growth and Income Fund),https://www.sec.gov/Archives/edgar/data/822977/000119312515368182/d46965dncsr.htm
+GSIIX,2013-08-31,0.79,83.0,N-CSR FY2015 (Growth and Income Fund),https://www.sec.gov/Archives/edgar/data/822977/000119312515368182/d46965dncsr.htm
+GSIIX,2014-08-31,0.78,40.0,N-CSR FY2015 (Growth and Income Fund),https://www.sec.gov/Archives/edgar/data/822977/000119312515368182/d46965dncsr.htm
+GSIIX,2015-08-31,0.74,47.0,N-CSR FY2015 (Growth and Income Fund),https://www.sec.gov/Archives/edgar/data/822977/000119312515368182/d46965dncsr.htm
+GSIIX,2016-08-31,0.73,61.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/822977/000119312520283568/d922248dncsr.htm
+GSIIX,2017-08-31,0.73,43.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/822977/000119312520283568/d922248dncsr.htm
+GSIIX,2018-08-31,0.73,69.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/822977/000119312520283568/d922248dncsr.htm
+GSIIX,2019-08-31,0.73,42.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/822977/000119312520283568/d922248dncsr.htm
+GSIIX,2020-08-31,0.74,42.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/822977/000119312520283568/d922248dncsr.htm
+GSIIX,2021-08-31,0.73,44.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/822977/000119312525264139/d860414dncsr.htm
+GSIIX,2022-08-31,0.73,17.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/822977/000119312525264139/d860414dncsr.htm
+GSIIX,2023-08-31,0.74,32.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/822977/000119312525264139/d860414dncsr.htm
+GSIIX,2024-08-31,0.71,31.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/822977/000119312525264139/d860414dncsr.htm
+GSIIX,2025-08-31,0.69,35.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/822977/000119312525264139/d860414dncsr.htm
+GSIIX,2026-08-31,0.69,37.0,N-CSR FY2026,https://www.sec.gov/Archives/edgar/data/822977/000119312526453393/d85888dncsr.htm
+HLIEX,2011-06-30,0.8,37.0,N-CSR FY2015 (Select Class),https://www.sec.gov/Archives/edgar/data/763852/000119312515311598/d45048dncsr.htm
+HLIEX,2012-06-30,0.78,44.0,N-CSR FY2015 (Select Class),https://www.sec.gov/Archives/edgar/data/763852/000119312515311598/d45048dncsr.htm
+HLIEX,2013-06-30,0.78,34.0,N-CSR FY2015 (Select Class),https://www.sec.gov/Archives/edgar/data/763852/000119312515311598/d45048dncsr.htm
+HLIEX,2014-06-30,0.79,20.0,N-CSR FY2015 (Select Class),https://www.sec.gov/Archives/edgar/data/763852/000119312515311598/d45048dncsr.htm
+HLIEX,2015-06-30,0.79,22.0,N-CSR FY2015 (Select Class),https://www.sec.gov/Archives/edgar/data/763852/000119312515311598/d45048dncsr.htm
+HLIEX,2016-06-30,0.79,20.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/763852/000119312520236349/d899078dncsr.htm
+HLIEX,2017-06-30,0.78,14.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/763852/000119312520236349/d899078dncsr.htm
+HLIEX,2018-06-30,0.74,20.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/763852/000119312520236349/d899078dncsr.htm
+HLIEX,2019-06-30,0.73,23.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/763852/000119312520236349/d899078dncsr.htm
+HLIEX,2020-06-30,0.71,22.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/763852/000119312520236349/d899078dncsr.htm
+HLIEX,2021-06-30,0.7,16.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/763852/000119312525193911/d20573dncsr.htm
+HLIEX,2022-06-30,0.7,15.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/763852/000119312525193911/d20573dncsr.htm
+HLIEX,2023-06-30,0.7,8.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/763852/000119312525193911/d20573dncsr.htm
+HLIEX,2024-06-30,0.7,20.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/763852/000119312525193911/d20573dncsr.htm
+HLIEX,2025-06-30,0.7,20.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/763852/000119312525193911/d20573dncsr.htm
+HLIEX,2026-06-30,0.69,38.0,N-CSR FY2026,https://www.sec.gov/Archives/edgar/data/763852/000119312526385073/d115295dncsr.htm
+LAFYX,2011-10-31,0.49,16.39,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/2691/000093041315004850/c83199_ncsr.htm
+LAFYX,2012-10-31,0.51,14.26,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/2691/000093041315004850/c83199_ncsr.htm
+LAFYX,2013-10-31,0.5,92.86,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/2691/000093041315004850/c83199_ncsr.htm
+LAFYX,2014-10-31,0.49,81.28,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/2691/000093041315004850/c83199_ncsr.htm
+LAFYX,2015-10-31,0.49,66.36,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/2691/000093041315004850/c83199_ncsr.htm
+LAFYX,2016-10-31,0.49,73.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/2691/000093041320002659/c100724_ncsr.htm
+LAFYX,2017-10-31,0.46,69.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/2691/000093041320002659/c100724_ncsr.htm
+LAFYX,2018-10-31,0.46,62.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/2691/000093041320002659/c100724_ncsr.htm
+LAFYX,2019-10-31,0.46,55.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/2691/000093041320002659/c100724_ncsr.htm
+LAFYX,2020-10-31,0.47,63.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/2691/000093041320002659/c100724_ncsr.htm
+LAFYX,2021-10-31,0.46,61.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/2691/000093041326000006/c114182_ncsr.htm
+LAFYX,2022-10-31,0.47,53.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/2691/000093041326000006/c114182_ncsr.htm
+LAFYX,2023-10-31,0.45,57.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/2691/000093041326000006/c114182_ncsr.htm
+LAFYX,2024-10-31,0.44,44.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/2691/000093041326000006/c114182_ncsr.htm
+LAFYX,2025-10-31,0.44,50.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/2691/000093041326000006/c114182_ncsr.htm
+LAFYX,2026-10-31,,,annual report not yet filed (last year carried forward),
+MADVX,2011-07-31,0.75,5.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/814507/000119312515334790/d26849dncsr.htm
+MADVX,2012-07-31,0.7,3.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/814507/000119312515334790/d26849dncsr.htm
+MADVX,2013-07-31,0.72,15.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/814507/000119312515334790/d26849dncsr.htm
+MADVX,2014-07-31,0.7,6.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/814507/000119312515334790/d26849dncsr.htm
+MADVX,2015-07-31,0.69,25.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/814507/000119312515334790/d26849dncsr.htm
+MADVX,2016-07-31,0.69,25.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/814507/000119312520186705/d833624dncsr.htm
+MADVX,2017-07-31,0.71,29.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/814507/000119312520186705/d833624dncsr.htm
+MADVX,2018-07-31,0.72,36.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/814507/000119312520186705/d833624dncsr.htm
+MADVX,2019-07-31,0.69,43.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/814507/000119312520186705/d833624dncsr.htm
+MADVX,2020-04-30,0.7,40.0,"N-CSR FY2020 (period 8/1/19-4/30/20, annualized)",https://www.sec.gov/Archives/edgar/data/814507/000119312520186705/d833624dncsr.htm
+MADVX,2021-04-30,0.7,45.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/814507/000119312525154797/d924848dncsr.htm
+MADVX,2022-04-30,0.68,47.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/814507/000119312525154797/d924848dncsr.htm
+MADVX,2023-04-30,0.69,58.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/814507/000119312525154797/d924848dncsr.htm
+MADVX,2024-04-30,0.7,41.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/814507/000119312525154797/d924848dncsr.htm
+MADVX,2025-04-30,0.69,53.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/814507/000119312525154797/d924848dncsr.htm
+MADVX,2026-04-30,0.69,75.0,N-CSR FY2026,https://www.sec.gov/Archives/edgar/data/814507/000119312526293865/d29693dncsr.htm
+VINIX,2011-12-31,0.044,5.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/862084/000093247116012807/institiutionalindex_final.htm
+VINIX,2012-12-31,0.04,5.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/862084/000093247116012807/institiutionalindex_final.htm
+VINIX,2013-12-31,0.04,5.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/862084/000093247116012807/institiutionalindex_final.htm
+VINIX,2014-12-31,0.04,4.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/862084/000093247116012807/institiutionalindex_final.htm
+VINIX,2015-12-31,0.04,5.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/862084/000093247116012807/institiutionalindex_final.htm
+VINIX,2016-12-31,0.04,5.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/862084/000110465921029830/tm213573d2_ncsr.htm
+VINIX,2017-12-31,0.04,5.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/862084/000110465921029830/tm213573d2_ncsr.htm
+VINIX,2018-12-31,0.035,6.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/862084/000110465921029830/tm213573d2_ncsr.htm
+VINIX,2019-12-31,0.035,4.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/862084/000110465921029830/tm213573d2_ncsr.htm
+VINIX,2020-12-31,0.035,4.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/862084/000110465921029830/tm213573d2_ncsr.htm
+VINIX,2021-12-31,0.035,3.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/862084/000110465926021504/tm263123d2_ncsr.htm
+VINIX,2022-12-31,0.035,3.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/862084/000110465926021504/tm263123d2_ncsr.htm
+VINIX,2023-12-31,0.035,3.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/862084/000110465926021504/tm263123d2_ncsr.htm
+VINIX,2024-12-31,0.035,4.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/862084/000110465926021504/tm263123d2_ncsr.htm
+VINIX,2025-12-31,0.035,4.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/862084/000110465926021504/tm263123d2_ncsr.htm
+VINIX,2026-12-31,,,annual report not yet filed (last year carried forward),
+VIVIX,2011-12-31,0.08,23.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/36405/000093247116012795/indexfunds_final.htm
+VIVIX,2012-12-31,0.08,22.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/36405/000093247116012795/indexfunds_final.htm
+VIVIX,2013-12-31,0.08,25.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/36405/000093247116012795/indexfunds_final.htm
+VIVIX,2014-12-31,0.08,6.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/36405/000093247116012795/indexfunds_final.htm
+VIVIX,2015-12-31,0.07,8.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/36405/000093247116012795/indexfunds_final.htm
+VIVIX,2016-12-31,0.05,7.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/36405/000110465921029832/tm213573d1_ncsr.htm
+VIVIX,2017-12-31,0.04,9.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/36405/000110465921029832/tm213573d1_ncsr.htm
+VIVIX,2018-12-31,0.04,8.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/36405/000110465921029832/tm213573d1_ncsr.htm
+VIVIX,2019-12-31,0.04,12.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/36405/000110465921029832/tm213573d1_ncsr.htm
+VIVIX,2020-12-31,0.04,10.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/36405/000110465921029832/tm213573d1_ncsr.htm
+VIVIX,2021-12-31,0.04,9.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/36405/000110465926021519/tm263123d8_ncsr.htm
+VIVIX,2022-12-31,0.04,5.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/36405/000110465926021519/tm263123d8_ncsr.htm
+VIVIX,2023-12-31,0.04,10.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/36405/000110465926021519/tm263123d8_ncsr.htm
+VIVIX,2024-12-31,0.04,9.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/36405/000110465926021519/tm263123d8_ncsr.htm
+VIVIX,2025-12-31,0.04,8.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/36405/000110465926021519/tm263123d8_ncsr.htm
+VIVIX,2026-12-31,,,annual report not yet filed (last year carried forward),
+VSCIX,2011-12-31,0.08,17.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/36405/000093247116012795/indexfunds_final.htm
+VSCIX,2012-12-31,0.08,14.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/36405/000093247116012795/indexfunds_final.htm
+VSCIX,2013-12-31,0.08,29.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/36405/000093247116012795/indexfunds_final.htm
+VSCIX,2014-12-31,0.08,10.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/36405/000093247116012795/indexfunds_final.htm
+VSCIX,2015-12-31,0.07,11.0,N-CSR FY2015,https://www.sec.gov/Archives/edgar/data/36405/000093247116012795/indexfunds_final.htm
+VSCIX,2016-12-31,0.05,14.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/36405/000110465921029832/tm213573d1_ncsr.htm
+VSCIX,2017-12-31,0.04,15.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/36405/000110465921029832/tm213573d1_ncsr.htm
+VSCIX,2018-12-31,0.04,15.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/36405/000110465921029832/tm213573d1_ncsr.htm
+VSCIX,2019-12-31,0.04,16.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/36405/000110465921029832/tm213573d1_ncsr.htm
+VSCIX,2020-12-31,0.04,22.0,N-CSR FY2020,https://www.sec.gov/Archives/edgar/data/36405/000110465921029832/tm213573d1_ncsr.htm
+VSCIX,2021-12-31,0.04,17.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/36405/000110465926021502/tm263123d1_ncsr.htm
+VSCIX,2022-12-31,0.04,14.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/36405/000110465926021502/tm263123d1_ncsr.htm
+VSCIX,2023-12-31,0.04,12.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/36405/000110465926021502/tm263123d1_ncsr.htm
+VSCIX,2024-12-31,0.04,13.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/36405/000110465926021502/tm263123d1_ncsr.htm
+VSCIX,2025-12-31,0.04,17.0,N-CSR FY2025,https://www.sec.gov/Archives/edgar/data/36405/000110465926021502/tm263123d1_ncsr.htm
+VSCIX,2026-12-31,,,annual report not yet filed (last year carried forward),
